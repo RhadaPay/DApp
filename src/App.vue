@@ -1,19 +1,17 @@
 <template>
   <v-app>
-    <v-app-bar :clipped-left="clipped" app fixed>
+    <v-app-bar app fixed>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <v-container class="d-flex align-center">
         <router-link to="/">
-          <v-avatar tile size="100">
-            <img alt="App Logo" src="./assets/logo.png" />
-          </v-avatar>
+          <img height="50" alt="App Logo" src="./assets/logo.png" />
         </router-link>
         <v-spacer />
         <v-slide-x-reverse-transition appear>
           <div class="d-flex">
             <div class="d-flex align-center ms-8">
-              <!-- <connect-button :large="pcOnly" /> -->
+              <connect-button />
             </div>
           </div>
         </v-slide-x-reverse-transition>
@@ -23,10 +21,6 @@
     <v-main>
       <v-navigation-drawer
         v-model="drawer"
-        :clipped="clipped"
-        app
-        class="navigationdrawer"
-        stateless
       >
       </v-navigation-drawer>
       <div>
@@ -35,3 +29,8 @@
     </v-main>
   </v-app>
 </template>
+<script setup lang="ts">
+import ConnectButton from "./components/ConnectButton.vue";
+import { ref } from "vue";
+const drawer = ref(true);
+</script>

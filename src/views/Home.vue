@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <img alt="App Logo" src="../assets/logo.png" />
-    <HelloWorld msg="Vue 3 + TypeScript + Vite + Vuetify 3" />
+    <HelloWorld/>
   </div>
 </template>
 <script setup lang="ts">
