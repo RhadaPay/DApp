@@ -1,16 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import { vuetify } from "./plugins/vuetify";
 import router from "./router";
-import store from "./store";
-import PrimeVue from 'primevue/config';
-import Menubar from 'primevue/menubar';
+import { store, key } from "./store/index";
 
-const app = createApp(App)
-app.use(store)
-app.use(router)
-app.use(PrimeVue);
-
-// PrimeVue Components
-app.component('Menubar', Menubar);
-
-app.mount("#app");
+createApp(App).use(store, key).use(router).use(vuetify).mount("#app");
