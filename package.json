@@ -16,6 +16,7 @@
   "dependencies": {
     "@intlify/vite-plugin-vue-i18n": "^2.4.0",
     "@mdi/font": "5.9.55",
+    "@walletconnect/web3-provider": "^1.6.5",
     "ethers": "^5.4.7",
     "roboto-fontface": "*",
     "vue": "^3.2.6",
