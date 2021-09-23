@@ -4,8 +4,11 @@
  * requirements of a voting system are proposals and votes.
  * Note that we do not specify anything complex like voting strategies or weighting here.
  * 
- * If we nest votes inside proposals, then a lot of the context can be inferred.
- * A question then is whether a vote signifies
+ * If we nest votes inside proposals, then a lot of the context can be inferred, eg:
+ * 
+ * Each vote does not need a proposal ID
+ * Each vote does not need a predefined 'for' or 'against'
+ * Strategies can be decoupled from the votes (to some extent)
  * 
  * @questions 
  * -----------
