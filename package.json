@@ -16,6 +16,7 @@
   "dependencies": {
     "@intlify/vite-plugin-vue-i18n": "^2.4.0",
     "@mdi/font": "5.9.55",
+    "@openzeppelin/contracts": "^4.3.2",
     "ethers": "^5.4.7",
     "roboto-fontface": "*",
     "vue": "^3.2.6",
@@ -26,6 +27,8 @@
     "web3modal": "^1.9.4"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "@vitejs/plugin-vue": "^1.6.0",
@@ -35,9 +38,11 @@
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^7.17.0",
+    "ethereum-waffle": "^3.4.0",
     "hardhat": "^2.6.4",
     "prettier": "^2.3.2",
     "sass": "~1.32.0",
