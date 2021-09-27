@@ -19,6 +19,7 @@ contract ContributorRegistry is Ownable{
     mapping (address => Contributor) public contributors;
     mapping (string => bool) registeredDiscordHandles;
     mapping (string => bool) registeredGithubUsernames;
+    address[] public registeredAddresses;
 
     /* ============ Events ============ */
     event Registered(address contributor, string discordHandle, string githubUsername);
@@ -37,7 +38,7 @@ contract ContributorRegistry is Ownable{
      * Register the senders address as a contributor pending confirmation.
      *
      * @param _discordHandle            Discord Handle to map to the senders address
-     * @param _githubUsernam            Github username to map to the senders address
+     * @param _githubUsername            Github username to map to the senders address
      *
      */
     function register(string memory _discordHandle, string memory _githubUsername) public {
@@ -45,6 +46,7 @@ contract ContributorRegistry is Ownable{
         require(!registeredDiscordHandles[_discordHandle], "Discord handle is already registered");
         require(!registeredGithubUsernames[_githubUsername], "Github username is already registered");
 
+        registeredAddresses.push(msg.sender);
         registeredDiscordHandles[_discordHandle] = true;
         contributors[msg.sender].discordHandle = _discordHandle;
 
