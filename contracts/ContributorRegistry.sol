@@ -8,7 +8,8 @@ contract ContributorRegistry is Ownable{
     enum Status {NONE, REGISTERED, CONFIRMED}
     struct Contributor {
         Status status;
-        uint8 confirmations;
+        uint8 numConfirmationVotes;
+        mapping (address => bool) confirmationVotes;
         string discordHandle;
         string githubUsername;
     }
@@ -21,6 +22,8 @@ contract ContributorRegistry is Ownable{
     }
 
     event Registered(address contributor, string discordHandle, string githubUsername);
+    event ConfirmationVote(address contributor, address voter, uint8 numVotes);
+    event ContributorConfirmed(address contributor);
 
     function register(string memory _discordHandle, string memory _githubUsername) public {
         require(contributors[msg.sender].status == Status.NONE, "Account has registered already");
@@ -35,5 +38,22 @@ contract ContributorRegistry is Ownable{
 
         contributors[msg.sender].status = Status.REGISTERED;
         emit Registered(msg.sender, _discordHandle, _githubUsername);
+    }
+
+    function confirm(address _contributorAddress) public {
+        require(contributors[msg.sender].status == Status.CONFIRMED || msg.sender == owner(), "Voter has to be a confirmed contributor or contract owner");
+
+        Contributor storage contributor = contributors[_contributorAddress];
+        require(contributor.status == Status.REGISTERED, "Contributor is not in confirmation process");
+        require(!contributor.confirmationVotes[msg.sender], "Voter already voted for this contributor");
+
+        contributor.confirmationVotes[msg.sender] = true;
+        contributor.numConfirmationVotes++;
+        emit ConfirmationVote(_contributorAddress, msg.sender, contributor.numConfirmationVotes);
+
+        if(contributor.numConfirmationVotes >= requiredConfirmations || msg.sender == owner()){
+            contributor.status == Status.CONFIRMED;
+            emit ContributorConfirmed(_contributorAddress);
+        }
     }
 }

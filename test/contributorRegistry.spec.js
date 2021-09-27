@@ -31,8 +31,27 @@ describe("ContributorRegistry", function () {
     );
   });
   it("Should be able to register", async function () {
-    console.log(contributorData)
-    const callData = contributorData[firstContributor.address];
-    await contributorRegistry.connect(firstContributor).register(callData.discordHandle, callData.githubUsername)
+    const methodArguments = contributorData[firstContributor.address];
+    await contributorRegistry
+      .connect(firstContributor)
+      .register(methodArguments.discordHandle, methodArguments.githubUsername);
+  });
+
+  it("Should return contributor Data", async function () {
+    const result = await contributorRegistry.contributors(
+      firstContributor.address
+    );
+    expect(result.discordHandle).to.equal(
+      contributorData[firstContributor.address].discordHandle
+    );
+    expect(result.githubUsername).to.equal(
+      contributorData[firstContributor.address].githubUsername
+    );
+  });
+
+  it("Owner should be able to confirm contributor unilaterally", async function () {
+    await contributorRegistry
+      .connect(owner)
+      .confirm(firstContributor.address);
   });
 });
