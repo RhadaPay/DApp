@@ -3,8 +3,8 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ContributorRegistry is Ownable{
-    uint8 public requiredConfirmations;
 
+    /* ============ Datatypes ============ */
     enum Status {NONE, REGISTERED, CONFIRMED}
     struct Contributor {
         Status status;
@@ -13,18 +13,33 @@ contract ContributorRegistry is Ownable{
         string discordHandle;
         string githubUsername;
     }
+
+    /* ============ State Variables ============ */
+    uint8 public requiredConfirmations;
     mapping (address => Contributor) public contributors;
     mapping (string => bool) registeredDiscordHandles;
     mapping (string => bool) registeredGithubUsernames;
+
+    /* ============ Events ============ */
+    event Registered(address contributor, string discordHandle, string githubUsername);
+    event ConfirmationVote(address contributor, address voter, uint8 numVotes);
+    event ContributorConfirmed(address contributor);
+
+    /* ============ Constructor ============ */
 
     constructor(uint8 _requiredConfirmations) public {
         requiredConfirmations = _requiredConfirmations;
     }
 
-    event Registered(address contributor, string discordHandle, string githubUsername);
-    event ConfirmationVote(address contributor, address voter, uint8 numVotes);
-    event ContributorConfirmed(address contributor);
+    /* ============ Functions ============ */
 
+    /**
+     * Register the senders address as a contributor pending confirmation.
+     *
+     * @param _discordHandle            Discord Handle to map to the senders address
+     * @param _githubUsernam            Github username to map to the senders address
+     *
+     */
     function register(string memory _discordHandle, string memory _githubUsername) public {
         require(contributors[msg.sender].status == Status.NONE, "Account has registered already");
         require(!registeredDiscordHandles[_discordHandle], "Discord handle is already registered");
@@ -40,6 +55,14 @@ contract ContributorRegistry is Ownable{
         emit Registered(msg.sender, _discordHandle, _githubUsername);
     }
 
+    /**
+     * Confirm the registration of given address.
+     * If the caller is the contract owner he can confirm a registration unilaterally otherwise the call is
+     * treated as a vote for confirmation.
+     *
+     * @param _contributorAddress       Address of the account whose registration is to be confirmed
+     *
+     */
     function confirm(address _contributorAddress) public {
         require(contributors[msg.sender].status == Status.CONFIRMED || msg.sender == owner(), "Voter has to be a confirmed contributor or contract owner");
 
