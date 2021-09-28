@@ -4,6 +4,7 @@
   "scripts": {
     "lint:style": "stylelint src/**/*.{css,scss,vue}",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
+    "test:contracts": "hardhat test",
     "serve": "vite preview",
     "build": "vite build",
     "dev": "vite"
