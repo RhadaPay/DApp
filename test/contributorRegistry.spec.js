@@ -35,6 +35,8 @@ describe("ContributorRegistry", function () {
     await contributorRegistry
       .connect(firstContributor)
       .register(methodArguments.discordHandle, methodArguments.githubUsername);
+    const numRegisteredContributors = await contributorRegistry.numRegisteredContributors();
+    expect(numRegisteredContributors).to.equal(1)
   });
 
   it("Should return contributor Data", async function () {

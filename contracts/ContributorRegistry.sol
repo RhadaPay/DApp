@@ -1,8 +1,10 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
 contract ContributorRegistry is Ownable{
+    using EnumerableSet for EnumerableSet.AddressSet;
 
     /* ============ Datatypes ============ */
     enum Status {NONE, REGISTERED, CONFIRMED}
@@ -15,11 +17,15 @@ contract ContributorRegistry is Ownable{
     }
 
     /* ============ State Variables ============ */
+    // Number of confirmation votes needed for a contributor to be confirmed
     uint8 public requiredConfirmations;
+    // Mapping to save contributor data for each address
     mapping (address => Contributor) public contributors;
+    // Mappings used to ensure every discord handle / github username is registered only once
     mapping (string => bool) registeredDiscordHandles;
     mapping (string => bool) registeredGithubUsernames;
-    address[] public registeredAddresses;
+    // List of registered (including non-confirmed) contributor addresses
+    EnumerableSet.AddressSet private registeredAddresses;
 
     /* ============ Events ============ */
     event Registered(address contributor, string discordHandle, string githubUsername);
@@ -32,7 +38,7 @@ contract ContributorRegistry is Ownable{
         requiredConfirmations = _requiredConfirmations;
     }
 
-    /* ============ Functions ============ */
+    /* ============ Mutating Functions ============ */
 
     /**
      * Register the senders address as a contributor pending confirmation.
@@ -46,7 +52,7 @@ contract ContributorRegistry is Ownable{
         require(!registeredDiscordHandles[_discordHandle], "Discord handle is already registered");
         require(!registeredGithubUsernames[_githubUsername], "Github username is already registered");
 
-        registeredAddresses.push(msg.sender);
+        registeredAddresses.add(msg.sender);
         registeredDiscordHandles[_discordHandle] = true;
         contributors[msg.sender].discordHandle = _discordHandle;
 
@@ -80,5 +86,31 @@ contract ContributorRegistry is Ownable{
             contributor.status == Status.CONFIRMED;
             emit ContributorConfirmed(_contributorAddress);
         }
+    }
+
+
+     /**
+     * Delete a contributor from the registry.
+     * Can only be called by the contract owner address.
+     *
+     * @param _contributorAddress       Address of the account whose registration is to be deleted
+     *
+     */
+    function unregister(address _contributorAddress) public {
+        require(msg.sender == owner(), "Only owner can delete contributors");
+
+        Contributor storage contributor = contributors[_contributorAddress];
+
+        registeredDiscordHandles[contributor.discordHandle] = false;
+        registeredGithubUsernames[contributor.githubUsername] = false;
+        // TODO: This will not reset the confirmationVotes nested mapping
+        delete contributors[_contributorAddress];
+        registeredAddresses.remove(_contributorAddress);
+    }
+
+
+    /* ============ Getter Functions ============ */
+    function numRegisteredContributors() public view returns(uint256){
+        return registeredAddresses.length();
     }
 }
