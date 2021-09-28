@@ -29,6 +29,7 @@ contract ContributorRegistry is Ownable{
 
     /* ============ Events ============ */
     event Registered(address contributor, string discordHandle, string githubUsername);
+    event UnRegistered(address contributor);
     event ConfirmationVote(address contributor, address voter, uint8 numVotes);
     event ContributorConfirmed(address contributor);
 
@@ -106,6 +107,7 @@ contract ContributorRegistry is Ownable{
         // TODO: This will not reset the confirmationVotes nested mapping
         delete contributors[_contributorAddress];
         registeredAddresses.remove(_contributorAddress);
+        emit UnRegistered(_contributorAddress);
     }
 
 
