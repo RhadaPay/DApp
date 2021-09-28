@@ -113,4 +113,8 @@ contract ContributorRegistry is Ownable{
     function numRegisteredContributors() public view returns(uint256){
         return registeredAddresses.length();
     }
+
+    function registeredContributorAddresses() public view returns(address[] memory){
+        return registeredAddresses.values();
+    }
 }
