@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "@openzeppelin/contracts/access/Ownable.sol";
+//import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ContributorRegistry.sol";
 /**
     Simple implementation of a voting contract done on-chain.
@@ -11,15 +11,14 @@ import "./ContributorRegistry.sol";
     Rounds are not currently time bound, they are flexible and minimal.
 
     TODO:
-        * Decide on cooldown/warmup - could be implemented as a status
-        * Determine a gas-efficient way to expose how many votes were received for each user.
-        * implement admin functionality
+        * Implement ability to modify the timeout
+        * Implement weighted voting
+        * Implement group voting? Can just give people the ability to vote for multiple rounds at once to save on space
  */
 contract RoundManager is Ownable {
 
     /* Data */
     enum Status {
-        Created, // decide if this is needed before Round Opens
         Open,
         Completed,
         Cancelled
@@ -27,15 +26,24 @@ contract RoundManager is Ownable {
 
     struct Round {
         Status status;
-        address[] membersWhoReceievedVotes; // Enumerable set/mapping from OZ?         
-        mapping (address => address[]) votesForUser; // do we need this
-        mapping (address => uint) numberOfVotesReceived; // and this?
-        mapping(address => bool) memberHasVoted; 
-        mapping (address => bool) admins; // how should this be implemented
+        address newUser;
+        uint128 numVotes;
+        uint128 endTime; // What uint does time use again
     }
 
-    Round[] rounds;
-    ContributorRegistry registry;
+    /* ============ State Variables ============ */
+    // Stores rounds
+    Round[] public rounds;
+    // The registry of a specific DAO
+    ContributorRegistry public registry;
+    // List of addresses with admin privileges for a given DAO
+    address[] public admins;
+    // Mapping of round to those who have voted in that round
+    mapping(uint => mapping(address => bool)) public hasVoted; // Or just map uint to address and iterate through?
+    // TEMPORARY MAPPING
+    mapping(address => uint) weightedVoting;
+    // Timeout
+    uint256 timeout;
 
     /* Events */
     event VoteCast(address _for, address _by);
@@ -52,44 +60,27 @@ contract RoundManager is Ownable {
         @dev this probably needs a check implemented in the other contract
      */
     modifier isConfirmedUser(address user) {
-        // Contributor contributor = registry.contributors(user);
+        // require(registry.contributors(user) == ??)
         _;
     }
 
     modifier userHasNotVoted(uint roundId) {
-        Round storage currentRound = rounds[roundId];
-        require(!currentRound.memberHasVoted[msg.sender], "Member has already voted");
-        _;
-    }
-
-    /**
-        Certain actions should be restricted to trusted members of the DAO 
-        @dev how to implement - we possibly need some additional functionality  
-     */
-    modifier isAdmin() {
+        require(!hasVoted[roundID][msg.sender], "Member has already voted");
         _;
     }
 
     /** 
         Calls the ContributorRegistry contract to validate the user
         has the right to vote, based on whether they are registered or not.
-     */
-    modifier isAllowedToVote() {
-        _;
-    }
-
-    /**
-        Ensures there are no currently open rounds
-     */
-    modifier noOpenRounds() {
-        Round storage latestRound = rounds[rounds.length - 1];
-        require(latestRound.status != Status.Open);
+    */
+    modifier canVote() {
+        require(weightedVoting[msg.sender] > 0);
         _;
     }
 
     modifier roundIsOpen(uint roundId) {
-        Round storage round = rounds[roundId];
-        require(round.status == Status.Open, "Round is not open");
+        _checkTime(roundId);
+        require(rounds[roundId].status == Status.Open, "Round is not open");
         _;
     }
 
@@ -97,70 +88,59 @@ contract RoundManager is Ownable {
         Constructor function
         @param registryAddress: this is the contract address where the list of registered
             and confirmed members of the dao can be found
-     */     
-    constructor(address registryAddress) {
+    */     
+    constructor(address registryAddress, uint256 _timeout) {
         registry = ContributorRegistry(registryAddress);
+        admins.push_back(msg.sender);
+        timeout = _timeout;
     }
-    
-    /* Methods */
+
+    /* Private Methods */
+    function _checkTime(uint256 roundId) private {
+        if(block.timestamp > endtime) {
+            rounds[roundId].status = Status.Closed;
+        }
+    }
+
+    /* Public Methods */
+
+    /**
+        Creates a new round of voting
+    */
+    function openRound(
+        address _newUser
+    ) public {
+        rounds.push_back(Round({
+            status: State.Open,
+            newUser: _newUser,
+            numVotes: 0,
+            endTime: block.timestamp + timeout
+        }));
+        // emit RoundOpened();
+    }
 
     /**
         @param roundId: numerical identifier found in the Round struct
         @param _for: the address of the person for whom you're voting
-        @param numOfVotes: different voting strategies may allow > 1 person 1 vote
      */
     function castVote(
         uint roundId,
-        address _for,
-        uint numOfVotes
-        ) public isConfirmedUser(_for) isAllowedToVote roundIsOpen(roundId) userHasNotVoted(roundId) {
+        address _for
+    ) public isConfirmedUser(_for) isAllowedToVote roundIsOpen(roundId) userHasNotVoted(roundId) {
+        hasVoted[roundId][msg.sender] = true;
+        rounds[roundID].numVotes += 1; // add safe math
         // emit VoteCast();
-    }
-
-    /**
-        Extend castVote functionality for multiple votes
-        @param _for: list of addresses to vote for
-        @param votes: how many votes for the address at index i
-     */
-    function castVotes(
-        address[] memory _for ,
-        uint[] memory votes,
-        uint roundId
-        ) public isAllowedToVote roundIsOpen(roundId) userHasNotVoted(roundId) {
-
-        for (uint i = 0; i < _for.length - 1; i++) {
-            castVote(roundId, _for[i], votes[i]);
-        }
-    }
-
-    /**
-        Creates a new round of voting
-     */
-    function openRound() public noOpenRounds {
-        // emit RoundOpened();
     }
 
     /**
         Closes an existing round of voting
      */
-    function closeRound(uint roundId) public isAdmin roundIsOpen(roundId) {
+    function closeRound(
+        uint roundId
+    ) public {
+        _updateTime(roundId);
+        require(rounds[roundId].status == Status.Closed, "The voting blocl is not closed");
         calculateVotes(roundId);
         // emit RoundClosed();
-    }
-
-    /**
-        Cancels an open round of voting
-     */
-    function cancelRound(uint roundId) public isAdmin roundIsOpen(roundId) {
-        // emit RoundCancelled();
-    }
-
-    /**
-        This is a somewhat tricky function. We need a gas-efficient way to calculate
-        the votes for each user, then we need to make that data available for a payment contract
-        to be executed accordingly.
-     */
-    function calculateVotes(uint roundId) public isAdmin {
-        // emit VotesCalculated();
     }
 }
