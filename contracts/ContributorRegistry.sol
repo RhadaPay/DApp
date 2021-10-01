@@ -1,9 +1,10 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+import "./interfaces/IVoterRegistry.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
-contract ContributorRegistry is Ownable{
+contract ContributorRegistry is Ownable, IVoterRegistry{
     using EnumerableSet for EnumerableSet.AddressSet;
 
     /* ============ Datatypes ============ */
@@ -119,4 +120,9 @@ contract ContributorRegistry is Ownable{
     function registeredContributorAddresses() public view returns(address[] memory){
         return registeredAddresses.values();
     }
+
+    function isValidVoter(address user) external override returns (bool){
+        return contributors[user].status == Status.CONFIRMED;
+    }
+
 }
