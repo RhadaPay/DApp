@@ -57,9 +57,6 @@ const actions: ActionTree<Web3State, any> = {
       providerOptions // required
     });
 
-    // This will get deprecated soon. Setting it to false removes a warning from the console.
-    window.ethereum.autoRefreshOnNetworkChange = false;
-
     // if the user is flagged as already connected, automatically connect back to Web3Modal
     if (localStorage.getItem('isConnected') === "true") {
       let providerW3m = await w3mObject.connect();
