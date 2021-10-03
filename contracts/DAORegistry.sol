@@ -7,15 +7,12 @@ import "./RoundVoting.sol";
 contract DAORegistry is Ownable {
     /* ============ Datatypes ============ */
     struct DAO {
-        Contributer[] registry; // this wont work but I want to have an array of contributors.
-                                 // But maybe that isn't nesessary for registration. I may have it backwards.. We probably want to connect the DAO contract
-                                 // to the other contracts, not the other contracts to the DAO
-                                 // This could also be just a list of members, e.g. adress[] members;
         address daoAddress;
         string daoName;
         bool approved; // my idea for this is that a member of Rhada can change the value of this field to approve a DAO application
         address roundManager;
         address[] admins;
+        address[] members;         // a list of members of the DAO. Should this be included here?
     }
 
     /* ============ State Variables ============ */
@@ -44,6 +41,7 @@ contract DAORegistry is Ownable {
     }
 
     /* Private Functions */ 
+
     function registerDAO() {
 
     }
