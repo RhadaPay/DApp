@@ -49,7 +49,6 @@ import ConnectButton from "./components/ConnectButton.vue";
 import { ref } from "vue";
 const drawer = ref(true);
 const items = ref([
-  { icon: "mdi-magnify", title: "Menu Item 1", to: "/" },
-  { icon: "mdi-plus-box", title: "Menu Item 2", to: "/" },
+  { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
 ]);
 </script>
