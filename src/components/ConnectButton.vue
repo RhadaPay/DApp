@@ -43,7 +43,7 @@ async function disconnectWeb3Modal() {
 }
 
 onMounted(async () => {
-  await store.dispatch(`web3/${Web3Actions.initWeb3Modal}`);
-  await store.dispatch(`web3/${Web3Actions.ethereumListener}`);
+  // await store.dispatch(`web3/${Web3Actions.initWeb3Modal}`);
+  // await store.dispatch(`web3/${Web3Actions.ethereumListener}`);
 });
 </script>
