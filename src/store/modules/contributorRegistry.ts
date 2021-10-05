@@ -33,6 +33,23 @@ const actions = {
       return new ethers.Contract(address, abi, provider);
     }
   },
+
+  async registerListeners({dispatch}){
+    const contract = await dispatch("connectContract");
+
+      contract.on("Registered", async () => {
+          await dispatch("loadRegisteredContributors")
+      });
+      contract.on("UnRegistered", async () => {
+          await dispatch("loadRegisteredContributors")
+      });
+      contract.on("ConfirmationVote", async () => {
+          await dispatch("loadRegisteredContributors")
+      });
+      contract.on("ContributorConfirmed", async () => {
+          await dispatch("loadRegisteredContributors")
+      });
+  },
   async loadRegisteredContributors({ dispatch, commit }) {
     const contract = await dispatch("connectContract");
 

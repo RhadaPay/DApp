@@ -78,6 +78,9 @@ const actions: ActionTree<Web3State, any> = {
     await dispatch("contributorRegistry/loadRegisteredContributors", null, {
       root: true,
     });
+    await dispatch("contributorRegistry/registerListeners", null, {
+      root: true,
+    });
   },
 
   async [Web3Actions.disconnectWeb3Modal]({ commit }) {
