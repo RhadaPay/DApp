@@ -55,11 +55,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions("contributorRegistration", ["register"]),
+    ...mapActions("contributorRegistry", ["registerContributor"]),
     async register() {
       try {
         this.loading = true;
-        await this.register({
+        await this.registerContributor({
           discordHandle: this.discordHandle,
           githubUsername: this.githubUsername,
         });

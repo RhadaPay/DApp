@@ -4,20 +4,18 @@ import {
   Web3Getters,
   Web3State,
   Web3Actions,
-  Web3Mutations
+  Web3Mutations,
 } from "@/types/store/Web3";
 import { ActionTree, GetterTree, Module, MutationTree } from "vuex";
-
 
 const state = {
   activeAccount: null,
   activeBalance: 0,
   chainId: null,
   chainName: null,
-  providerEthers: null, // this is "provider" for Ethers.js
   isConnected: false,
   providerW3m: null, // this is "provider" from Web3Modal
-  web3Modal: null
+  web3Modal: null,
 } as Web3State;
 
 const getters: GetterTree<Web3State, any> = {
@@ -37,36 +35,29 @@ const getters: GetterTree<Web3State, any> = {
     return state.chainName;
   },
   [Web3Getters.getProviderEthers](state) {
-    return state.providerEthers;
+    return new ethers.providers.Web3Provider(state.providerW3m);
+  },
+  [Web3Getters.getSigner](state, getters) {
+    const provider = getters[Web3Getters.getProviderEthers]
+    const activeAccount = getters[Web3Getters.getActiveAccount]
+    return provider.getSigner(activeAccount);
   },
   [Web3Getters.getWeb3Modal](state) {
     return state.web3Modal;
   },
   [Web3Getters.isUserConnected](state) {
     return state.isConnected;
-  }
+  },
 };
 
 const actions: ActionTree<Web3State, any> = {
   async [Web3Actions.initWeb3Modal]({ commit, dispatch }) {
-    const providerOptions = {
-    };
-    
+    const providerOptions = {};
+
     const w3mObject = new Web3Modal({
       cacheProvider: true, // optional
-      providerOptions // required
+      providerOptions, // required
     });
-
-    // if the user is flagged as already connected, automatically connect back to Web3Modal
-    if (localStorage.getItem('isConnected') === "true") {
-      let providerW3m = await w3mObject.connect();
-      commit(Web3Mutations.setIsConnected, true);
-
-      commit(Web3Mutations.setActiveAccount, window.ethereum.selectedAddress);
-      commit(Web3Mutations.setChainData, window.ethereum.chainId);
-      commit(Web3Mutations.setEthersProvider, providerW3m);
-      dispatch(Web3Actions.fetchActiveBalance);
-    }
 
     commit(Web3Mutations.setWeb3ModalInstance, w3mObject);
   },
@@ -77,9 +68,16 @@ const actions: ActionTree<Web3State, any> = {
       commit(Web3Mutations.setIsConnected, true);
       commit(Web3Mutations.setActiveAccount, window.ethereum.selectedAddress);
       commit(Web3Mutations.setChainData, window.ethereum.chainId);
-      commit(Web3Mutations.setEthersProvider, providerW3m);
+      commit(Web3Mutations.setProviderW3m, providerW3m);
       dispatch(Web3Actions.fetchActiveBalance);
+      await dispatch(Web3Actions.initializeContractData);
     }
+  },
+
+  async [Web3Actions.initializeContractData]({ dispatch }) {
+    await dispatch("contributorRegistry/loadRegisteredContributors", null, {
+      root: true,
+    });
   },
 
   async [Web3Actions.disconnectWeb3Modal]({ commit }) {
@@ -88,46 +86,41 @@ const actions: ActionTree<Web3State, any> = {
   },
 
   async [Web3Actions.ethereumListener]({ commit, dispatch }) {
-
-    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+    window.ethereum.on("accountsChanged", (accounts: string[]) => {
       if (state.isConnected) {
         commit(Web3Mutations.setActiveAccount, accounts[0]);
-        commit(Web3Mutations.setEthersProvider, state.providerW3m);
         dispatch(Web3Actions.fetchActiveBalance);
       }
     });
 
-    window.ethereum.on('chainChanged', (chainId: number) => {
+    window.ethereum.on("chainChanged", (chainId: number) => {
       commit(Web3Mutations.setChainData, chainId);
-      commit(Web3Mutations.setEthersProvider, state.providerW3m);
       dispatch(Web3Actions.fetchActiveBalance);
+      dispatch(Web3Actions.initializeContractData);
     });
-
   },
 
-  async [Web3Actions.fetchActiveBalance]({ commit }) {
-    if (state.providerEthers && state.activeAccount) {
-      let balance = await state.providerEthers.getBalance(state.activeAccount);
+  async [Web3Actions.fetchActiveBalance]({ commit, getters }) {
+    if (state.providerW3m && state.activeAccount) {
+      let providerEthers = getters["getProviderEthers"];
+      let balance = await providerEthers.getBalance(state.activeAccount);
       commit(Web3Mutations.setActiveBalance, balance);
     }
-  }
-  
+  },
 };
 
 const mutations: MutationTree<Web3State> = {
-
   async [Web3Mutations.disconnectWallet](state) {
     state.activeAccount = null;
     state.activeBalance = 0;
-    state.providerEthers = null;
     if (state.providerW3m.close && state.providerW3m !== null) {
       await state.providerW3m.close();
     }
     state.providerW3m = null;
     if (state.web3Modal) {
-      await state.web3Modal.clearCachedProvider();
+      state.web3Modal.clearCachedProvider();
     }
-    window.location.href = '../'; // redirect to the Main page
+    window.location.href = "../"; // redirect to the Main page
   },
 
   [Web3Mutations.setActiveAccount](state, selectedAddress) {
@@ -141,7 +134,7 @@ const mutations: MutationTree<Web3State> = {
   [Web3Mutations.setChainData](state, chainId) {
     state.chainId = chainId;
 
-    switch(chainId) {
+    switch (chainId) {
       case "0x1":
         state.chainName = "Mainnet";
         break;
@@ -165,21 +158,19 @@ const mutations: MutationTree<Web3State> = {
     }
   },
 
-  async [Web3Mutations.setEthersProvider](state, providerW3m) {
-    state.providerW3m = providerW3m;
-    state.providerEthers = new ethers.providers.Web3Provider(providerW3m);
-  },
-
   [Web3Mutations.setIsConnected](state, isConnected) {
     state.isConnected = isConnected;
     // add to persistent storage so that the user can be logged back in when revisiting website
-    localStorage.setItem('isConnected', isConnected);
+    localStorage.setItem("isConnected", isConnected);
   },
 
   [Web3Mutations.setWeb3ModalInstance](state, w3mObject) {
     state.web3Modal = w3mObject;
-  }
+  },
 
+  [Web3Mutations.setProviderW3m](state, providerW3m) {
+    state.providerW3m = providerW3m;
+  },
 };
 
 export default {
@@ -187,5 +178,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 } as Module<Web3State, any>;

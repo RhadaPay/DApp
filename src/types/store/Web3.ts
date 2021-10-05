@@ -8,12 +8,14 @@ export enum Web3Getters {
     getChainId = 'getChainId',
     getChainName = 'getChainName',
     getProviderEthers = 'getProviderEthers',
+    getSigner = 'getSigner',
     getWeb3Modal = 'getWeb3Modal',
     isUserConnected = 'isUserConnected'
 }
 
 export enum Web3Actions {
     initWeb3Modal = 'initWeb3Modal',
+    initializeContractData = 'initializeContractData',
     connectWeb3Modal = 'connectWeb3Modal',
     disconnectWeb3Modal = 'disconnectWeb3Modal',
     ethereumListener = 'ethereumListener',
@@ -25,8 +27,8 @@ export enum Web3Mutations {
     setActiveAccount = 'setActiveAccount',
     setActiveBalance = 'setActiveBalance',
     setChainData = 'setChainData',
-    setEthersProvider = 'setEthersProvider',
     setIsConnected = 'setIsConnected',
+    setProviderW3m = 'setProviderW3m',
     setWeb3ModalInstance = 'setWeb3ModalInstance',
 }
 

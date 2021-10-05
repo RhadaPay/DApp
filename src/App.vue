@@ -50,5 +50,6 @@ import { ref } from "vue";
 const drawer = ref(true);
 const items = ref([
   { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
+  { icon: "mdi-format-list-bulleted-square", title: "Contributor List", to: "/contributors" },
 ]);
 </script>
