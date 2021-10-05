@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 import "./interfaces/IVoterRegistry.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
-import "hardhat/console.sol";
 
 contract ContributorRegistry is Ownable, IVoterRegistry{
     using EnumerableSet for EnumerableSet.AddressSet;
@@ -76,7 +75,6 @@ contract ContributorRegistry is Ownable, IVoterRegistry{
      */
     function confirm(address _contributorAddress) public {
         require(contributors[msg.sender].status == Status.CONFIRMED || msg.sender == owner(), "Voter has to be a confirmed contributor or contract owner");
-        console.log("Vote Received. Owner is: ", owner());
 
         Contributor storage contributor = contributors[_contributorAddress];
         require(contributor.status == Status.REGISTERED, "Contributor is not in confirmation process");
@@ -88,7 +86,6 @@ contract ContributorRegistry is Ownable, IVoterRegistry{
 
         if(contributor.numConfirmationVotes >= requiredConfirmations || msg.sender == owner()){
             contributor.status = Status.CONFIRMED;
-            console.log("Contributor confirmed");
             emit ContributorConfirmed(_contributorAddress);
         }
     }
