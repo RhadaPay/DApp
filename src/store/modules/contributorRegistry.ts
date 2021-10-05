@@ -37,6 +37,7 @@ const actions = {
   async registerListeners({dispatch}){
     const contract = await dispatch("connectContract");
 
+      // For now just reload all contributor data on any event
       contract.on("Registered", async () => {
           await dispatch("loadRegisteredContributors")
       });

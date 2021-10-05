@@ -17,7 +17,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>Status</v-list-item-title>
-          <v-list-item-subtitle>{{ statusId }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ statusString }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -27,7 +27,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-card-actions>
+      <v-card-actions v-if="statusId != 2">
         <v-spacer></v-spacer>
 
         <v-btn
@@ -56,6 +56,12 @@ export default {
     githubUsername: { type: String, required: true },
     statusId: { type: Number, required: true },
     confirmationVotes: { type: Number, required: true },
+  },
+  computed: {
+    statusString() {
+      const statusMapping = { 0: "None", 1: "Registered", 2: "Confirmed" };
+      return statusMapping[this.statusId];
+    },
   },
   methods: {
     ...mapActions("contributorRegistry", ["confirmContributor"]),
