@@ -66,11 +66,17 @@ const actions = {
     const contract = await dispatch("connectContract");
 
     if (contract != null) {
-      const activeAccount = rootGetters[`web3/${Web3Getters.getSigner}`];
-      let registeredContributorAddresses = await contract
-        .connect(activeAccount)
-        .register(discordHandle, githubUsername);
-      console.log("Retrieved contributor list", registeredContributorAddresses);
+      const singer = rootGetters[`web3/${Web3Getters.getSigner}`];
+      await contract.connect(singer).register(discordHandle, githubUsername);
+    }
+  },
+
+  async confirmContributor({ dispatch, rootGetters }, { address }) {
+    const contract = await dispatch("connectContract");
+
+    if (contract != null) {
+      const singer = rootGetters[`web3/${Web3Getters.getSigner}`];
+      await contract.connect(singer).confirm(address);
     }
   },
 };
