@@ -10,7 +10,7 @@ contract DAORegistry is Ownable {
         address daoAddress;
         string daoName;
         bool approved; // my idea for this is that a member of Rhada can change the value of this field to approve a DAO application
-        address roundManager;
+        address roundManager; // take out
         address[] admins;
         address[] members;         // a list of members of the DAO. Should this be included here?
     }
@@ -50,7 +50,15 @@ contract DAORegistry is Ownable {
 
     }
 
-    function addContributor() {
+    function what daos am I in() {
+
+    }
+
+    /**
+        This is a validation check for when a user selects a DAO in the front end to ensure they are actually a member of the DAO.
+        Another option to do this is to emit a memberlist in the registry and check that member list for x address.
+     */
+    function isMemberOf() {
 
     }
 
