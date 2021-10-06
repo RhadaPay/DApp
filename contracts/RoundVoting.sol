@@ -65,6 +65,17 @@ contract RoundManager {
         require(rounds[roundID].status == _status, "Round is not open");
         _;
     }
+    
+    modifier isAdmin() {
+        bool ret = false;
+        for(uint i = 0; !ret && i < admins.length; i++) {
+            if(admins[i] == msg.sender) {
+                ret = true;
+            }
+        }
+        require(ret);
+        _;
+    }
 
     /**
         Constructor function
@@ -82,7 +93,7 @@ contract RoundManager {
     /**
      * Opens a new round.
      * Confirms that there exist valid users passed to the function before opening a new round.
-     * A new round opens with a given salary to be split later amongst the contributors.
+     * A new round opens with a given salary to be split  amongst the contributors following the voting period.
      * 
      *
      * @param newUsers          Addresses of the proposed users to be eligible for votes 
@@ -91,7 +102,8 @@ contract RoundManager {
      */
     function openRound(
         address[] memory newUsers, uint256 _roundSalary
-    ) public {
+    ) public payable {
+        require(msg.value >= _roundSalary);
         // Checks to see if there are valid users in the passed array
         for(uint256 i = 0; i < newUsers.length; i++) {
             /*
@@ -114,33 +126,40 @@ contract RoundManager {
     }
 
     /**
-     * Opens a new round.
-     * Confirms that there exist valid users passed to the function before opening a new round.
-     * A new round opens with a given salary to be split later amongst the contributors.
+     * Votes for users in a given round.
+     * Confirms that the function caller is eligible to vote for a round.
+     * The function caller casts his vote for the inputted addresses.
      * 
      *
-     * @param roundID          Addresses of the proposed users to be eligible for votes 
+     * @param roundID          The ID of the round
      * @param _for             The salary of the current round
      *
      */
     function castVote(
         uint256 roundID,
         address[] memory _for
-    ) public roundState(roundID, Status.Open) {
+    ) public canVote(roundID) roundState(roundID, Status.Open) {
         hasVoted[roundID][msg.sender] = true;
         for(uint256 i = 0; i < _for.length; i++) {
-            numVotes[roundID][msg.sender] += weightedVoting[msg.sender];
+            numVotes[roundID][msg.sender] += weightedVoting[msg.sender]; // Add safe math later
         }
         
         // emit VoteCast();
     }
 
     /**
-        Closes an existing round of voting
+     * Closes a given round.
+     * Confirms that the given round is open.
+     * The function caller casts his vote for the inputted addresses.
+     * 
+     *
+     * @param roundID           The ID of the round
+     * @param _newStatus        The new status, either closed or canceled, for the given round
+     *
      */
     function closeRound(
         uint256 roundID, Status _newStatus
-    ) public {
+    ) public isAdmin {
         require(rounds[roundID].status == Status.Open, "The voting block is not closed");
         require(_newStatus != Status.Open);
         rounds[roundID].status = _newStatus;
