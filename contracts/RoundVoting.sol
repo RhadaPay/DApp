@@ -10,14 +10,11 @@ pragma solidity ^0.8.0;
     Rounds are not currently time bound, they are flexible and minimal.
 
     TODO:
-        * Implement ability to modify the timeout
-        * Implement weighted voting
-        * Implement group voting? Can just give people the ability to vote for multiple rounds at once to save on space
-        * Different structs for different types of voting (more expensive deployment -> save lots for users)
+        * Implement timer between rounds. Probably better on the frontend, but users may also want to block abuse
  */
 contract RoundManager {
 
-    /* Data */
+    /* ============ Datatypes ============ */
     enum Status {
         Open,
         Completed,
@@ -37,9 +34,9 @@ contract RoundManager {
     // List of addresses with admin privileges for a given DAO
     address[] public admins;
     // List of the addresses in the current round
-    mapping(uint256 => address[]) usersInRound;
+    mapping(uint256 => address[]) public usersInRound;
     // Number of votes for a user in a given round
-    mapping(uint256 => mapping(address => uint256)) numVotes;
+    mapping(uint256 => mapping(address => uint256)) public numVotes;
     // Mapping of round to those who have voted in that round
     mapping(uint256 => mapping(address => bool)) public hasVoted; // Or just map uint256 to address and iterate through?
     // TEMPORARY MAPPING
@@ -47,10 +44,12 @@ contract RoundManager {
     // Timeout
     uint256 timePerRound;
 
-    /* Events */
-    event RoundOpen(uint256 roundID, uint256 roundSalary);
+    /* ============ Events ============ */
+
+    event RoundOpened(uint256 roundID, uint256 roundSalary);
+    event RoundOpenFailed();
     event RoundClosed(uint256 roundID, address closedBy);
-    event VoteCast(uint256 roundID, address voter, address _for);
+    event VoteCast(uint256 roundID, address voter);
 
     /* Modifiers */
 
@@ -75,18 +74,15 @@ contract RoundManager {
         _;
     }
 
-    /**
-        Constructor function
-        @param registryAddress: this is the contract address where the list of registered
-            and confirmed members of the dao can be found
-    */     
+    /* ============ Constructor ============ */
+
     constructor(address registryAddress, uint256 _timePerRound) {
         registry = ContributorRegistry(registryAddress);
         admins.push(msg.sender);
         timePerRound = _timePerRound;
     }
 
-    /* Public Methods */
+    /* ============ Mutating Functions ============ */
 
     /**
      * Opens a new round.
@@ -120,9 +116,10 @@ contract RoundManager {
                 status: Status.Open,
                 roundSalary: _roundSalary
             }));
-            // emit RoundOpened();
+            uint256 roundID = rounds.length - 1;
+            emit RoundOpened(roundID, _roundSalary);
         } else {
-            // emit round failed to open
+            emit RoundOpenFailed();
         }
     }
 
@@ -144,8 +141,7 @@ contract RoundManager {
         for(uint256 i = 0; i < _for.length; i++) {
             numVotes[roundID][msg.sender] += weightedVoting[msg.sender]; // Add safe math later
         }
-        
-        // emit VoteCast();
+        emit VoteCast(roundID, msg.sender);
     }
 
     /**
@@ -162,7 +158,7 @@ contract RoundManager {
         uint256 roundID, Status _newStatus
     ) public isAdmin {
         require(rounds[roundID].status == Status.Open, "The voting block is not closed");
-        require(_newStatus != Status.Open);
+        require(_newStatus != Status.Open, "Can only close or cancel a round");
         rounds[roundID].status = _newStatus;
         // emit RoundClosed();
     }
