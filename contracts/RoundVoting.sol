@@ -48,11 +48,9 @@ contract RoundManager {
     uint256 timePerRound;
 
     /* Events */
-    event VoteCast(address _for, address _by);
-    event RoundOpen(uint256 roundID);
-    event RoundCompleted(uint256 roundID);
-    event RoundCancelled(uint256 roundID);
-    event VotesCalculated(uint256 roundID);
+    event RoundOpen(uint256 roundID, uint256 roundSalary);
+    event RoundClosed(uint256 roundID, address closedBy);
+    event VoteCast(uint256 roundID, address voter, address _for);
 
     /* Modifiers */
 
@@ -102,7 +100,10 @@ contract RoundManager {
      */
     function openRound(
         address[] memory newUsers, uint256 _roundSalary
-    ) public payable {
+    ) public payable isAdmin {
+        // Check to see if only round open
+        require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open);
+        // Deposit check
         require(msg.value >= _roundSalary);
         // Checks to see if there are valid users in the passed array
         for(uint256 i = 0; i < newUsers.length; i++) {
