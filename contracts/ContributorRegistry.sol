@@ -36,7 +36,7 @@ contract ContributorRegistry is Ownable, IVoterRegistry{
 
     /* ============ Constructor ============ */
 
-    constructor(uint8 _requiredConfirmations) public {
+    constructor(uint8 _requiredConfirmations) {
         requiredConfirmations = _requiredConfirmations;
     }
 
@@ -121,7 +121,7 @@ contract ContributorRegistry is Ownable, IVoterRegistry{
         return registeredAddresses.values();
     }
 
-    function isValidVoter(address user) external override returns (bool){
+    function isValidVoter(address user) external view override returns (bool){
         return contributors[user].status == Status.CONFIRMED;
     }
 

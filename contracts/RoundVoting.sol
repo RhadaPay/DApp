@@ -1,6 +1,6 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-// import "./ContributorRegistry.sol";
+ import "./ContributorRegistry.sol";
 /**
     Simple implementation of a voting contract done on-chain.
     This contract allows confirmed members to place votes for a particular member.
@@ -33,7 +33,7 @@ contract RoundManager {
     // Stores rounds
     Round[] public rounds;
     // The registry of a specific DAO
-    // ContributorRegistry public registry;
+    ContributorRegistry public registry;
     // List of addresses with admin privileges for a given DAO
     address[] public admins;
     // List of the addresses in the current round
@@ -56,16 +56,6 @@ contract RoundManager {
 
     /* Modifiers */
 
-    /**
-        Calls the ContributorRegistry contract to validate the user being voted
-        for is eligible to receive votes
-        @dev this probably needs a check implemented in the other contract
-     */
-    modifier isConfirmedUser(address user) {
-        // require(registry.contributors(user) == ??)
-        _;
-    }
-
     modifier canVote(uint256 roundID) {
         require(!hasVoted[roundID][msg.sender] && weightedVoting[msg.sender] > 0);
         _;
@@ -82,8 +72,8 @@ contract RoundManager {
             and confirmed members of the dao can be found
     */     
     constructor(address registryAddress, uint256 _timePerRound) {
-        //registry = ContributorRegistry(registryAddress);
-        admins.push_back(msg.sender);
+        registry = ContributorRegistry(registryAddress);
+        admins.push(msg.sender);
         timePerRound = _timePerRound;
     }
 
@@ -95,12 +85,24 @@ contract RoundManager {
     function openRound(
         address[] memory newUsers, uint256 _roundSalary
     ) public {
-        rounds.push_back(Round({
-            status: Status.Open,
-            roundSalary: _roundSalary
-        }));
-        usersInRound[rounds.size - 1] = newUsers;
-        // emit RoundOpened();
+        bool validUsersInRound = false;
+        for(uint i = 0; i < newUsers.length; i++) {
+            /*
+            if(newUsers[i] in registry) {
+                validUsersInRound = true;
+                usersInRound[rounds.length - 1].push(newUsers[i]);
+            }
+            */
+        }
+        if(validUsersInRound) {
+            rounds.push(Round({
+                status: Status.Open,
+                roundSalary: _roundSalary
+            }));
+            // emit RoundOpened();
+        } else {
+            // emit round failed to open
+        }
     }
 
     /**
@@ -110,9 +112,9 @@ contract RoundManager {
     function castVote(
         uint256 roundID,
         address[] memory _for
-    ) public isConfirmedUser(_for) roundIsOpen(roundID) {
+    ) public roundIsOpen(roundID) {
         hasVoted[roundID][msg.sender] = true;
-        for(int i = 0; i < _for.size; i++) {
+        for(uint i = 0; i < _for.length; i++) {
             numVotes[roundID][msg.sender] += weightedVoting[msg.sender];
         }
         
@@ -123,9 +125,11 @@ contract RoundManager {
         Closes an existing round of voting
      */
     function closeRound(
-        uint roundID
+        uint roundID, Status _newStatus
     ) public {
-        require(rounds[roundID].status == Status.Closed, "The voting blocl is not closed");
+        require(rounds[roundID].status == Status.Open, "The voting block is not closed");
+        require(_newStatus != Status.Open);
+        rounds[roundID].status = _newStatus;
         // emit RoundClosed();
     }
 }
