@@ -26,7 +26,7 @@ contract RoundManager {
 
     struct Round {
         Status status;
-        uint roundSalary;
+        uint256 roundSalary;
     }
 
     /* ============ State Variables ============ */
@@ -37,22 +37,22 @@ contract RoundManager {
     // List of addresses with admin privileges for a given DAO
     address[] public admins;
     // List of the addresses in the current round
-    mapping(uint => address[]) usersInRound;
+    mapping(uint256 => address[]) usersInRound;
     // Number of votes for a user in a given round
-    mapping(uint => mapping(address => uint)) numVotes;
+    mapping(uint256 => mapping(address => uint256)) numVotes;
     // Mapping of round to those who have voted in that round
-    mapping(uint => mapping(address => bool)) public hasVoted; // Or just map uint to address and iterate through?
+    mapping(uint256 => mapping(address => bool)) public hasVoted; // Or just map uint256 to address and iterate through?
     // TEMPORARY MAPPING
-    mapping(address => uint) weightedVoting; // Use weighted voting identifier as way to communicate w registry about who can/can't vote
+    mapping(address => uint256) weightedVoting; // Use weighted voting identifier as way to communicate w registry about who can/can't vote
     // Timeout
     uint256 timePerRound;
 
     /* Events */
     event VoteCast(address _for, address _by);
-    event RoundOpen(uint roundID);
-    event RoundCompleted(uint roundID);
-    event RoundCancelled(uint roundID);
-    event VotesCalculated(uint roundID);
+    event RoundOpen(uint256 roundID);
+    event RoundCompleted(uint256 roundID);
+    event RoundCancelled(uint256 roundID);
+    event VotesCalculated(uint256 roundID);
 
     /* Modifiers */
 
@@ -61,8 +61,8 @@ contract RoundManager {
         _;
     }
 
-    modifier roundIsOpen(uint256 roundID) {
-        require(rounds[roundID].status == Status.Open, "Round is not open");
+    modifier roundState(uint256 roundID, Status _status) {
+        require(rounds[roundID].status == _status, "Round is not open");
         _;
     }
 
@@ -80,13 +80,20 @@ contract RoundManager {
     /* Public Methods */
 
     /**
-        Creates a new round of voting
-    */
+     * Opens a new round.
+     * Confirms that there exist valid users passed to the function before opening a new round.
+     * A new round opens with a given salary to be split later amongst the contributors.
+     * 
+     *
+     * @param newUsers          Addresses of the proposed users to be eligible for votes 
+     * @param _roundSalary      The salary of the current round
+     *
+     */
     function openRound(
         address[] memory newUsers, uint256 _roundSalary
     ) public {
-        bool validUsersInRound = false;
-        for(uint i = 0; i < newUsers.length; i++) {
+        // Checks to see if there are valid users in the passed array
+        for(uint256 i = 0; i < newUsers.length; i++) {
             /*
             if(newUsers[i] in registry) {
                 validUsersInRound = true;
@@ -94,7 +101,8 @@ contract RoundManager {
             }
             */
         }
-        if(validUsersInRound) {
+        // If there are valid users, then create a new round. Else, do not open a new round
+        if(usersInRound[rounds.length - 1].length > 0) {
             rounds.push(Round({
                 status: Status.Open,
                 roundSalary: _roundSalary
@@ -106,15 +114,21 @@ contract RoundManager {
     }
 
     /**
-        @param roundID: numerical identifier found in the Round struct
-        @param _for: the address of the person for whom you're voting
+     * Opens a new round.
+     * Confirms that there exist valid users passed to the function before opening a new round.
+     * A new round opens with a given salary to be split later amongst the contributors.
+     * 
+     *
+     * @param roundID          Addresses of the proposed users to be eligible for votes 
+     * @param _for             The salary of the current round
+     *
      */
     function castVote(
         uint256 roundID,
         address[] memory _for
-    ) public roundIsOpen(roundID) {
+    ) public roundState(roundID, Status.Open) {
         hasVoted[roundID][msg.sender] = true;
-        for(uint i = 0; i < _for.length; i++) {
+        for(uint256 i = 0; i < _for.length; i++) {
             numVotes[roundID][msg.sender] += weightedVoting[msg.sender];
         }
         
@@ -125,7 +139,7 @@ contract RoundManager {
         Closes an existing round of voting
      */
     function closeRound(
-        uint roundID, Status _newStatus
+        uint256 roundID, Status _newStatus
     ) public {
         require(rounds[roundID].status == Status.Open, "The voting block is not closed");
         require(_newStatus != Status.Open);
