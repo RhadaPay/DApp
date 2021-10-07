@@ -1,0 +1,518 @@
+{
+    "contractName": "PaymentStream",
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_owner",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalAmount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "createPaymentStream",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "name": "userToPaymentStream",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_totalAmount\",\"type\":\"uint256\"}],\"name\":\"createPaymentStream\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userToPaymentStream\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":\"PaymentStream\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":{\"keccak256\":\"0x9e1500566e8e1f62e3d73e3b5d80f93dc8f0aaa545727ccadfaf3fb8d876a6d0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dc2993764937ef7212ad34e57243ecaaab1056a6e4f1ade5dc78e7035856ef8f\",\"dweb:/ipfs/QmPAfn2QbWRknsTVjQVV9JU7UyUSDB3dfWg3PZjfwbwiS3\"]}},\"version\":1}",
+    "bytecode": "608060405234801561001057600080fd5b506101af806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220d1516347f6c28aa78e50df5caf58e2eba2f45cfe467cca6aefd1813f6aea952464736f6c63430008090033",
+    "deployedBytecode": "608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220d1516347f6c28aa78e50df5caf58e2eba2f45cfe467cca6aefd1813f6aea952464736f6c63430008090033",
+    "sourceMap": "60:454:0:-:0;;;277:24;;;;;;;;;;60:454;;;;;;",
+    "deployedSourceMap": "60:454:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;309:202;;;;;;:::i;:::-;409:93;;;;;;;;;-1:-1:-1;;;;;409:93:0;;;;;;;;;;;394:9;:109;;;;;;;-1:-1:-1;394:109:0;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;394:109:0;;;;;;;;;;;;;;;309:202;;;180:54;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;788:25:1;;;776:2;761:18;180:54:0;;;;;;;14:173:1;82:20;;-1:-1:-1;;;;;131:31:1;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:254::-;260:6;268;321:2;309:9;300:7;296:23;292:32;289:52;;;337:1;334;327:12;289:52;360:29;379:9;360:29;:::i;:::-;350:39;436:2;421:18;;;;408:32;;-1:-1:-1;;;192:254:1:o;451:186::-;510:6;563:2;551:9;542:7;538:23;534:32;531:52;;;579:1;576;569:12;531:52;602:29;621:9;602:29;:::i;:::-;592:39;451:186;-1:-1:-1;;;451:186:1:o",
+    "sourcePath": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.9+commit.e5eed63a"
+    },
+    "ast": {
+        "absolutePath": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol",
+        "exportedSymbols": {
+            "PaymentStream": [
+                36
+            ]
+        },
+        "id": 37,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "33:23:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "PaymentStream",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 36,
+                "linearizedBaseContracts": [
+                    36
+                ],
+                "name": "PaymentStream",
+                "nameLocation": "69:13:0",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "canonicalName": "PaymentStream.PaymentToken",
+                        "id": 6,
+                        "members": [
+                            {
+                                "constant": false,
+                                "id": 3,
+                                "mutability": "mutable",
+                                "name": "owner",
+                                "nameLocation": "129:5:0",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 6,
+                                "src": "121:13:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                },
+                                "typeName": {
+                                    "id": 2,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "121:7:0",
+                                    "stateMutability": "nonpayable",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 5,
+                                "mutability": "mutable",
+                                "name": "totalAmount",
+                                "nameLocation": "153:11:0",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 6,
+                                "src": "145:19:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 4,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "145:7:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            }
+                        ],
+                        "name": "PaymentToken",
+                        "nameLocation": "97:12:0",
+                        "nodeType": "StructDefinition",
+                        "scope": 36,
+                        "src": "90:82:0",
+                        "visibility": "public"
+                    },
+                    {
+                        "constant": false,
+                        "functionSelector": "6222dfb2",
+                        "id": 10,
+                        "mutability": "mutable",
+                        "name": "userToPaymentStream",
+                        "nameLocation": "215:19:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 36,
+                        "src": "180:54:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                            "typeString": "mapping(address => uint256)"
+                        },
+                        "typeName": {
+                            "id": 9,
+                            "keyType": {
+                                "id": 7,
+                                "name": "address",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "188:7:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_address",
+                                    "typeString": "address"
+                                }
+                            },
+                            "nodeType": "Mapping",
+                            "src": "180:27:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                                "typeString": "mapping(address => uint256)"
+                            },
+                            "valueType": {
+                                "id": 8,
+                                "name": "uint256",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "199:7:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                }
+                            }
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "constant": false,
+                        "id": 14,
+                        "mutability": "mutable",
+                        "name": "tokenList",
+                        "nameLocation": "259:9:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 36,
+                        "src": "244:24:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage",
+                            "typeString": "struct PaymentStream.PaymentToken[]"
+                        },
+                        "typeName": {
+                            "baseType": {
+                                "id": 12,
+                                "nodeType": "UserDefinedTypeName",
+                                "pathNode": {
+                                    "id": 11,
+                                    "name": "PaymentToken",
+                                    "nodeType": "IdentifierPath",
+                                    "referencedDeclaration": 6,
+                                    "src": "244:12:0"
+                                },
+                                "referencedDeclaration": 6,
+                                "src": "244:12:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_struct$_PaymentToken_$6_storage_ptr",
+                                    "typeString": "struct PaymentStream.PaymentToken"
+                                }
+                            },
+                            "id": 13,
+                            "nodeType": "ArrayTypeName",
+                            "src": "244:14:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr",
+                                "typeString": "struct PaymentStream.PaymentToken[]"
+                            }
+                        },
+                        "visibility": "internal"
+                    },
+                    {
+                        "body": {
+                            "id": 17,
+                            "nodeType": "Block",
+                            "src": "291:10:0",
+                            "statements": []
+                        },
+                        "id": 18,
+                        "implemented": true,
+                        "kind": "constructor",
+                        "modifiers": [],
+                        "name": "",
+                        "nameLocation": "-1:-1:-1",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 15,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "288:2:0"
+                        },
+                        "returnParameters": {
+                            "id": 16,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "291:0:0"
+                        },
+                        "scope": 36,
+                        "src": "277:24:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 34,
+                            "nodeType": "Block",
+                            "src": "383:128:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "arguments": [
+                                                    {
+                                                        "id": 29,
+                                                        "name": "_owner",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 20,
+                                                        "src": "444:6:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": 30,
+                                                        "name": "_totalAmount",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 22,
+                                                        "src": "478:12:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_uint256",
+                                                            "typeString": "uint256"
+                                                        }
+                                                    }
+                                                ],
+                                                "expression": {
+                                                    "argumentTypes": [
+                                                        {
+                                                            "typeIdentifier": "t_address",
+                                                            "typeString": "address"
+                                                        },
+                                                        {
+                                                            "typeIdentifier": "t_uint256",
+                                                            "typeString": "uint256"
+                                                        }
+                                                    ],
+                                                    "id": 28,
+                                                    "name": "PaymentToken",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 6,
+                                                    "src": "409:12:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_type$_t_struct$_PaymentToken_$6_storage_ptr_$",
+                                                        "typeString": "type(struct PaymentStream.PaymentToken storage pointer)"
+                                                    }
+                                                },
+                                                "id": 31,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "kind": "structConstructorCall",
+                                                "lValueRequested": false,
+                                                "names": [
+                                                    "owner",
+                                                    "totalAmount"
+                                                ],
+                                                "nodeType": "FunctionCall",
+                                                "src": "409:93:0",
+                                                "tryCall": false,
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_struct$_PaymentToken_$6_memory_ptr",
+                                                    "typeString": "struct PaymentStream.PaymentToken memory"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_struct$_PaymentToken_$6_memory_ptr",
+                                                    "typeString": "struct PaymentStream.PaymentToken memory"
+                                                }
+                                            ],
+                                            "expression": {
+                                                "id": 25,
+                                                "name": "tokenList",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 14,
+                                                "src": "394:9:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage",
+                                                    "typeString": "struct PaymentStream.PaymentToken storage ref[] storage ref"
+                                                }
+                                            },
+                                            "id": 27,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberName": "push",
+                                            "nodeType": "MemberAccess",
+                                            "src": "394:14:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr_$_t_struct$_PaymentToken_$6_storage_$returns$__$bound_to$_t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr_$",
+                                                "typeString": "function (struct PaymentStream.PaymentToken storage ref[] storage pointer,struct PaymentStream.PaymentToken storage ref)"
+                                            }
+                                        },
+                                        "id": 32,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "394:109:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 33,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "394:109:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "5b306755",
+                        "id": 35,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "createPaymentStream",
+                        "nameLocation": "318:19:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 23,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 20,
+                                    "mutability": "mutable",
+                                    "name": "_owner",
+                                    "nameLocation": "346:6:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 35,
+                                    "src": "338:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 19,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "338:7:0",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 22,
+                                    "mutability": "mutable",
+                                    "name": "_totalAmount",
+                                    "nameLocation": "362:12:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 35,
+                                    "src": "354:20:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 21,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "354:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "337:38:0"
+                        },
+                        "returnParameters": {
+                            "id": 24,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "383:0:0"
+                        },
+                        "scope": 36,
+                        "src": "309:202:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "public"
+                    }
+                ],
+                "scope": 37,
+                "src": "60:454:0",
+                "usedErrors": []
+            }
+        ],
+        "src": "33:481:0"
+    },
+    "functionHashes": {
+        "createPaymentStream(address,uint256)": "5b306755",
+        "userToPaymentStream(address)": "6222dfb2"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "86200",
+            "executionCost": "135",
+            "totalCost": "86335"
+        },
+        "external": {
+            "createPaymentStream(address,uint256)": "70998",
+            "userToPaymentStream(address)": "2510"
+        }
+    }
+}

@@ -11,6 +11,7 @@ pragma solidity ^0.8.0;
 
     TODO:
         * Implement timer between rounds. Probably better on the frontend, but users may also want to block abuse
+        * Implement a timeout between rounds so that the parent contract has enough time to process everything (prevents abuse)
  */
 contract RoundManager {
 

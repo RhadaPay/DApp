@@ -3,7 +3,9 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ContributorRegistry.sol";
-import "./RoundVoting.sol";
+import "./RoundManager.sol";
+import "./Mock/MockEventStream.sol";
+import "./Mock/MockPaymentStream.sol";
 
 /* This is the Rhada parent contract. Here is the following flow:
  * DAOs will register to join the Rhada protocol and will list the following:
@@ -16,57 +18,49 @@ import "./RoundVoting.sol";
  *              - Manages rounds and voting on specific users in a round. Used to define how salary gets split
  *              - Possible (and probably necessary) feature: rewards DAO members for participating
  *      - Will deploy a PaymentStream contract specific to that DAO
- *              -
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- 
-
+ *              - Controls the setting up of payments
+ *      - Will deploy an EventStream contract specific to that DAO
+ *              - Controls monitoring of no idea
+ * DAO parent address will map to address of each one
+ * Contracts compiles data from all of them
+ *      - ContributorRegistry
+ *          - Don't know what to use from this
+ *      - RoundVoting
+ *          - Needs votes + users (will use to split salary among them all)
+ *      - PaymentStream
+ *          - Will start payment stream from this contract
+ * Also managed here:
+ *      - Weighted voting (DAO -> weighted voting. Can act as a user registry per DAO)
+ *      - Lists all contributors, payments streams, and other important data
 */
 
 
 contract DAORegistry is Ownable {
     /* ============ Datatypes ============ */
-    enum Status {NONE, REGISTERED, CONFIRMED}
     struct DAO {
-        Status status;
-
+        ContributorRegistry registry; // Probably don't need
+        RoundManager roundManager;
+        PaymentStream paymentStream;
+        EventStream eventStream; // Does this exist?
     }
 
     /* ============ State Variables ============ */
     // List of DAOs
-    DAO[] public list;
-    // Mapping of DAO to Voting contract
-    mapping(address => address) public daoToVoting;
-    // Mapping of DAO to Contributor Registry
-    mapping(address =>)
+    DAO[] public daoList;
+    // Mapping of DAO to DAO object
+    mapping(address => uint256) public addressToDAO;
+    // Mapping of DAO object to parent address
+    mapping(uint256 => address) public daoToAddress; // Need? Might remove later if we can't find a good front/backend use case for
 
-    /**
-        Constructor Function
-        @param streamAddress The contract address used to manage payment streams.
-        @param roundAddress The contract address where round voting details can be found.
-        @param registryAddress The contract address where registered contributors and confirmed
-                                members can be found.
-     */
-    constructor (address streamAddress, address roundAddress, address registryAddress) {
-        // stream = PaymentStream(streamAddress);
-        round = RoundVoting(roundAddress);
-        registry = ContributorRegistry(registryAddress);
+    event DaoRegistered(address parent);
+
+    constructor () {
     }
-/*
 
-    
-*/
+    function register() public {
+        daoList.push(DAO({
+            
+        }));
+        emit DaoRegistered(msg.sender);
+    }
 }

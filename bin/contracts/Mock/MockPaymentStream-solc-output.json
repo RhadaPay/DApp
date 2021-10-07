@@ -1,7 +1,7 @@
 {
     "contracts": {
         "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol": {
-            "PayentStream": {
+            "PaymentStream": {
                 "abi": [
                     {
                         "inputs": [],
@@ -63,9 +63,9 @@
                         },
                         "generatedSources": [],
                         "linkReferences": {},
-                        "object": "608060405234801561001057600080fd5b506101af806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220fd0e5df216557616a7bee2bc73e06bb2d547c2a63e6537de8574a458c84f8cc864736f6c63430008090033",
-                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1AF DUP1 PUSH2 0x20 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x5B306755 EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0x6222DFB2 EQ PUSH2 0xDF JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0xDD PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0x12D JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD DUP1 DUP3 ADD SWAP1 SWAP2 MSTORE PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 DUP4 AND DUP2 MSTORE PUSH1 0x20 DUP2 ADD SWAP2 DUP3 MSTORE PUSH1 0x1 DUP1 SLOAD DUP1 DUP3 ADD DUP3 SSTORE PUSH1 0x0 SWAP2 SWAP1 SWAP2 MSTORE SWAP1 MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF6 PUSH1 0x2 SWAP1 SWAP3 MUL SWAP2 DUP3 ADD DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND SWAP2 SWAP1 SWAP5 AND OR SWAP1 SWAP3 SSTORE MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF7 SWAP1 SWAP2 ADD SSTORE JUMP JUMPDEST STOP JUMPDEST PUSH2 0xFF PUSH2 0xED CALLDATASIZE PUSH1 0x4 PUSH2 0x157 JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP2 SWAP1 MSTORE SWAP1 DUP2 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST DUP1 CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x128 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x140 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x149 DUP4 PUSH2 0x111 JUMP JUMPDEST SWAP5 PUSH1 0x20 SWAP4 SWAP1 SWAP4 ADD CALLDATALOAD SWAP4 POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x169 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x172 DUP3 PUSH2 0x111 JUMP JUMPDEST SWAP4 SWAP3 POP POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 REVERT 0xE 0x5D CALLCODE AND SSTORE PUSH23 0x16A7BEE2BC73E06BB2D547C2A63E6537DE8574A458C84F DUP13 0xC8 PUSH5 0x736F6C6343 STOP ADDMOD MULMOD STOP CALLER ",
-                        "sourceMap": "60:453:0:-:0;;;276:24;;;;;;;;;;60:453;;;;;;"
+                        "object": "608060405234801561001057600080fd5b506101af806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220d1516347f6c28aa78e50df5caf58e2eba2f45cfe467cca6aefd1813f6aea952464736f6c63430008090033",
+                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1AF DUP1 PUSH2 0x20 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x5B306755 EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0x6222DFB2 EQ PUSH2 0xDF JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0xDD PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0x12D JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD DUP1 DUP3 ADD SWAP1 SWAP2 MSTORE PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 DUP4 AND DUP2 MSTORE PUSH1 0x20 DUP2 ADD SWAP2 DUP3 MSTORE PUSH1 0x1 DUP1 SLOAD DUP1 DUP3 ADD DUP3 SSTORE PUSH1 0x0 SWAP2 SWAP1 SWAP2 MSTORE SWAP1 MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF6 PUSH1 0x2 SWAP1 SWAP3 MUL SWAP2 DUP3 ADD DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND SWAP2 SWAP1 SWAP5 AND OR SWAP1 SWAP3 SSTORE MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF7 SWAP1 SWAP2 ADD SSTORE JUMP JUMPDEST STOP JUMPDEST PUSH2 0xFF PUSH2 0xED CALLDATASIZE PUSH1 0x4 PUSH2 0x157 JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP2 SWAP1 MSTORE SWAP1 DUP2 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST DUP1 CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x128 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x140 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x149 DUP4 PUSH2 0x111 JUMP JUMPDEST SWAP5 PUSH1 0x20 SWAP4 SWAP1 SWAP4 ADD CALLDATALOAD SWAP4 POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x169 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x172 DUP3 PUSH2 0x111 JUMP JUMPDEST SWAP4 SWAP3 POP POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xD1 MLOAD PUSH4 0x47F6C28A 0xA7 DUP15 POP 0xDF 0x5C 0xAF PC 0xE2 0xEB LOG2 DELEGATECALL 0x5C INVALID CHAINID PUSH29 0xCA6AEFD1813F6AEA952464736F6C634300080900330000000000000000 ",
+                        "sourceMap": "60:454:0:-:0;;;277:24;;;;;;;;;;60:454;;;;;;"
                     },
                     "deployedBytecode": {
                         "functionDebugData": {
@@ -725,9 +725,9 @@
                         ],
                         "immutableReferences": {},
                         "linkReferences": {},
-                        "object": "608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220fd0e5df216557616a7bee2bc73e06bb2d547c2a63e6537de8574a458c84f8cc864736f6c63430008090033",
-                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x5B306755 EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0x6222DFB2 EQ PUSH2 0xDF JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0xDD PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0x12D JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD DUP1 DUP3 ADD SWAP1 SWAP2 MSTORE PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 DUP4 AND DUP2 MSTORE PUSH1 0x20 DUP2 ADD SWAP2 DUP3 MSTORE PUSH1 0x1 DUP1 SLOAD DUP1 DUP3 ADD DUP3 SSTORE PUSH1 0x0 SWAP2 SWAP1 SWAP2 MSTORE SWAP1 MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF6 PUSH1 0x2 SWAP1 SWAP3 MUL SWAP2 DUP3 ADD DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND SWAP2 SWAP1 SWAP5 AND OR SWAP1 SWAP3 SSTORE MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF7 SWAP1 SWAP2 ADD SSTORE JUMP JUMPDEST STOP JUMPDEST PUSH2 0xFF PUSH2 0xED CALLDATASIZE PUSH1 0x4 PUSH2 0x157 JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP2 SWAP1 MSTORE SWAP1 DUP2 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST DUP1 CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x128 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x140 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x149 DUP4 PUSH2 0x111 JUMP JUMPDEST SWAP5 PUSH1 0x20 SWAP4 SWAP1 SWAP4 ADD CALLDATALOAD SWAP4 POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x169 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x172 DUP3 PUSH2 0x111 JUMP JUMPDEST SWAP4 SWAP3 POP POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 REVERT 0xE 0x5D CALLCODE AND SSTORE PUSH23 0x16A7BEE2BC73E06BB2D547C2A63E6537DE8574A458C84F DUP13 0xC8 PUSH5 0x736F6C6343 STOP ADDMOD MULMOD STOP CALLER ",
-                        "sourceMap": "60:453:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;308:202;;;;;;:::i;:::-;408:93;;;;;;;;;-1:-1:-1;;;;;408:93:0;;;;;;;;;;;393:9;:109;;;;;;;-1:-1:-1;393:109:0;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;393:109:0;;;;;;;;;;;;;;;308:202;;;179:54;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;788:25:1;;;776:2;761:18;179:54:0;;;;;;;14:173:1;82:20;;-1:-1:-1;;;;;131:31:1;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:254::-;260:6;268;321:2;309:9;300:7;296:23;292:32;289:52;;;337:1;334;327:12;289:52;360:29;379:9;360:29;:::i;:::-;350:39;436:2;421:18;;;;408:32;;-1:-1:-1;;;192:254:1:o;451:186::-;510:6;563:2;551:9;542:7;538:23;534:32;531:52;;;579:1;576;569:12;531:52;602:29;621:9;602:29;:::i;:::-;592:39;451:186;-1:-1:-1;;;451:186:1:o"
+                        "object": "608060405234801561001057600080fd5b50600436106100365760003560e01c80635b3067551461003b5780636222dfb2146100df575b600080fd5b6100dd61004936600461012d565b604080518082019091526001600160a01b0392831681526020810191825260018054808201825560009190915290517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6600290920291820180546001600160a01b0319169190941617909255517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf790910155565b005b6100ff6100ed366004610157565b60006020819052908152604090205481565b60405190815260200160405180910390f35b80356001600160a01b038116811461012857600080fd5b919050565b6000806040838503121561014057600080fd5b61014983610111565b946020939093013593505050565b60006020828403121561016957600080fd5b61017282610111565b939250505056fea2646970667358221220d1516347f6c28aa78e50df5caf58e2eba2f45cfe467cca6aefd1813f6aea952464736f6c63430008090033",
+                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x5B306755 EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0x6222DFB2 EQ PUSH2 0xDF JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0xDD PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0x12D JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD DUP1 DUP3 ADD SWAP1 SWAP2 MSTORE PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 DUP4 AND DUP2 MSTORE PUSH1 0x20 DUP2 ADD SWAP2 DUP3 MSTORE PUSH1 0x1 DUP1 SLOAD DUP1 DUP3 ADD DUP3 SSTORE PUSH1 0x0 SWAP2 SWAP1 SWAP2 MSTORE SWAP1 MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF6 PUSH1 0x2 SWAP1 SWAP3 MUL SWAP2 DUP3 ADD DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND SWAP2 SWAP1 SWAP5 AND OR SWAP1 SWAP3 SSTORE MLOAD PUSH32 0xB10E2D527612073B26EECDFD717E6A320CF44B4AFAC2B0732D9FCBE2B7FA0CF7 SWAP1 SWAP2 ADD SSTORE JUMP JUMPDEST STOP JUMPDEST PUSH2 0xFF PUSH2 0xED CALLDATASIZE PUSH1 0x4 PUSH2 0x157 JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP2 SWAP1 MSTORE SWAP1 DUP2 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD SWAP1 DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST DUP1 CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x128 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x140 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x149 DUP4 PUSH2 0x111 JUMP JUMPDEST SWAP5 PUSH1 0x20 SWAP4 SWAP1 SWAP4 ADD CALLDATALOAD SWAP4 POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x169 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x172 DUP3 PUSH2 0x111 JUMP JUMPDEST SWAP4 SWAP3 POP POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xD1 MLOAD PUSH4 0x47F6C28A 0xA7 DUP15 POP 0xDF 0x5C 0xAF PC 0xE2 0xEB LOG2 DELEGATECALL 0x5C INVALID CHAINID PUSH29 0xCA6AEFD1813F6AEA952464736F6C634300080900330000000000000000 ",
+                        "sourceMap": "60:454:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;309:202;;;;;;:::i;:::-;409:93;;;;;;;;;-1:-1:-1;;;;;409:93:0;;;;;;;;;;;394:9;:109;;;;;;;-1:-1:-1;394:109:0;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;394:109:0;;;;;;;;;;;;;;;309:202;;;180:54;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;788:25:1;;;776:2;761:18;180:54:0;;;;;;;14:173:1;82:20;;-1:-1:-1;;;;;131:31:1;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:254::-;260:6;268;321:2;309:9;300:7;296:23;292:32;289:52;;;337:1;334;327:12;289:52;360:29;379:9;360:29;:::i;:::-;350:39;436:2;421:18;;;;408:32;;-1:-1:-1;;;192:254:1:o;451:186::-;510:6;563:2;551:9;542:7;538:23;534:32;531:52;;;579:1;576;569:12;531:52;602:29;621:9;602:29;:::i;:::-;592:39;451:186;-1:-1:-1;;;451:186:1:o"
                     },
                     "gasEstimates": {
                         "creation": {
@@ -745,12 +745,12 @@
                         "userToPaymentStream(address)": "6222dfb2"
                     }
                 },
-                "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_totalAmount\",\"type\":\"uint256\"}],\"name\":\"createPaymentStream\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userToPaymentStream\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":\"PayentStream\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":{\"keccak256\":\"0x5015ffc6003d02d6805416df91091f6c396e7bf2ca5c198aebf04690f59cc267\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://88f8480f5b2524933f63cee5a6f9fd0f2f2887f64c6b3b4f775ca8b572a6d97d\",\"dweb:/ipfs/QmeGTqygwHUbg3rYjg6tWK91ttqssAT8fGzYt6MGB5hfM4\"]}},\"version\":1}",
+                "metadata": "{\"compiler\":{\"version\":\"0.8.9+commit.e5eed63a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_totalAmount\",\"type\":\"uint256\"}],\"name\":\"createPaymentStream\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userToPaymentStream\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":\"PaymentStream\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol\":{\"keccak256\":\"0x9e1500566e8e1f62e3d73e3b5d80f93dc8f0aaa545727ccadfaf3fb8d876a6d0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dc2993764937ef7212ad34e57243ecaaab1056a6e4f1ade5dc78e7035856ef8f\",\"dweb:/ipfs/QmPAfn2QbWRknsTVjQVV9JU7UyUSDB3dfWg3PZjfwbwiS3\"]}},\"version\":1}",
                 "storageLayout": {
                     "storage": [
                         {
                             "astId": 10,
-                            "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PayentStream",
+                            "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PaymentStream",
                             "label": "userToPaymentStream",
                             "offset": 0,
                             "slot": "0",
@@ -758,7 +758,7 @@
                         },
                         {
                             "astId": 14,
-                            "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PayentStream",
+                            "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PaymentStream",
                             "label": "tokenList",
                             "offset": 0,
                             "slot": "1",
@@ -774,7 +774,7 @@
                         "t_array(t_struct(PaymentToken)6_storage)dyn_storage": {
                             "base": "t_struct(PaymentToken)6_storage",
                             "encoding": "dynamic_array",
-                            "label": "struct PayentStream.PaymentToken[]",
+                            "label": "struct PaymentStream.PaymentToken[]",
                             "numberOfBytes": "32"
                         },
                         "t_mapping(t_address,t_uint256)": {
@@ -786,11 +786,11 @@
                         },
                         "t_struct(PaymentToken)6_storage": {
                             "encoding": "inplace",
-                            "label": "struct PayentStream.PaymentToken",
+                            "label": "struct PaymentStream.PaymentToken",
                             "members": [
                                 {
                                     "astId": 3,
-                                    "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PayentStream",
+                                    "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PaymentStream",
                                     "label": "owner",
                                     "offset": 0,
                                     "slot": "0",
@@ -798,7 +798,7 @@
                                 },
                                 {
                                     "astId": 5,
-                                    "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PayentStream",
+                                    "contract": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol:PaymentStream",
                                     "label": "totalAmount",
                                     "offset": 0,
                                     "slot": "1",
@@ -827,7 +827,7 @@
             "ast": {
                 "absolutePath": "c:/Users/ksilv/Github/Rhada/DApp/contracts/Mock/MockPaymentStream.sol",
                 "exportedSymbols": {
-                    "PayentStream": [
+                    "PaymentStream": [
                         36
                     ]
                 },
@@ -849,7 +849,7 @@
                     {
                         "abstract": false,
                         "baseContracts": [],
-                        "canonicalName": "PayentStream",
+                        "canonicalName": "PaymentStream",
                         "contractDependencies": [],
                         "contractKind": "contract",
                         "fullyImplemented": true,
@@ -857,12 +857,12 @@
                         "linearizedBaseContracts": [
                             36
                         ],
-                        "name": "PayentStream",
-                        "nameLocation": "69:12:0",
+                        "name": "PaymentStream",
+                        "nameLocation": "69:13:0",
                         "nodeType": "ContractDefinition",
                         "nodes": [
                             {
-                                "canonicalName": "PayentStream.PaymentToken",
+                                "canonicalName": "PaymentStream.PaymentToken",
                                 "id": 6,
                                 "members": [
                                     {
@@ -870,10 +870,10 @@
                                         "id": 3,
                                         "mutability": "mutable",
                                         "name": "owner",
-                                        "nameLocation": "128:5:0",
+                                        "nameLocation": "129:5:0",
                                         "nodeType": "VariableDeclaration",
                                         "scope": 6,
-                                        "src": "120:13:0",
+                                        "src": "121:13:0",
                                         "stateVariable": false,
                                         "storageLocation": "default",
                                         "typeDescriptions": {
@@ -884,7 +884,7 @@
                                             "id": 2,
                                             "name": "address",
                                             "nodeType": "ElementaryTypeName",
-                                            "src": "120:7:0",
+                                            "src": "121:7:0",
                                             "stateMutability": "nonpayable",
                                             "typeDescriptions": {
                                                 "typeIdentifier": "t_address",
@@ -898,10 +898,10 @@
                                         "id": 5,
                                         "mutability": "mutable",
                                         "name": "totalAmount",
-                                        "nameLocation": "152:11:0",
+                                        "nameLocation": "153:11:0",
                                         "nodeType": "VariableDeclaration",
                                         "scope": 6,
-                                        "src": "144:19:0",
+                                        "src": "145:19:0",
                                         "stateVariable": false,
                                         "storageLocation": "default",
                                         "typeDescriptions": {
@@ -912,7 +912,7 @@
                                             "id": 4,
                                             "name": "uint256",
                                             "nodeType": "ElementaryTypeName",
-                                            "src": "144:7:0",
+                                            "src": "145:7:0",
                                             "typeDescriptions": {
                                                 "typeIdentifier": "t_uint256",
                                                 "typeString": "uint256"
@@ -922,10 +922,10 @@
                                     }
                                 ],
                                 "name": "PaymentToken",
-                                "nameLocation": "96:12:0",
+                                "nameLocation": "97:12:0",
                                 "nodeType": "StructDefinition",
                                 "scope": 36,
-                                "src": "89:82:0",
+                                "src": "90:82:0",
                                 "visibility": "public"
                             },
                             {
@@ -934,10 +934,10 @@
                                 "id": 10,
                                 "mutability": "mutable",
                                 "name": "userToPaymentStream",
-                                "nameLocation": "214:19:0",
+                                "nameLocation": "215:19:0",
                                 "nodeType": "VariableDeclaration",
                                 "scope": 36,
-                                "src": "179:54:0",
+                                "src": "180:54:0",
                                 "stateVariable": true,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -950,14 +950,14 @@
                                         "id": 7,
                                         "name": "address",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "187:7:0",
+                                        "src": "188:7:0",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_address",
                                             "typeString": "address"
                                         }
                                     },
                                     "nodeType": "Mapping",
-                                    "src": "179:27:0",
+                                    "src": "180:27:0",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                                         "typeString": "mapping(address => uint256)"
@@ -966,7 +966,7 @@
                                         "id": 8,
                                         "name": "uint256",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "198:7:0",
+                                        "src": "199:7:0",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_uint256",
                                             "typeString": "uint256"
@@ -980,15 +980,15 @@
                                 "id": 14,
                                 "mutability": "mutable",
                                 "name": "tokenList",
-                                "nameLocation": "258:9:0",
+                                "nameLocation": "259:9:0",
                                 "nodeType": "VariableDeclaration",
                                 "scope": 36,
-                                "src": "243:24:0",
+                                "src": "244:24:0",
                                 "stateVariable": true,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
                                     "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage",
-                                    "typeString": "struct PayentStream.PaymentToken[]"
+                                    "typeString": "struct PaymentStream.PaymentToken[]"
                                 },
                                 "typeName": {
                                     "baseType": {
@@ -999,21 +999,21 @@
                                             "name": "PaymentToken",
                                             "nodeType": "IdentifierPath",
                                             "referencedDeclaration": 6,
-                                            "src": "243:12:0"
+                                            "src": "244:12:0"
                                         },
                                         "referencedDeclaration": 6,
-                                        "src": "243:12:0",
+                                        "src": "244:12:0",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_struct$_PaymentToken_$6_storage_ptr",
-                                            "typeString": "struct PayentStream.PaymentToken"
+                                            "typeString": "struct PaymentStream.PaymentToken"
                                         }
                                     },
                                     "id": 13,
                                     "nodeType": "ArrayTypeName",
-                                    "src": "243:14:0",
+                                    "src": "244:14:0",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr",
-                                        "typeString": "struct PayentStream.PaymentToken[]"
+                                        "typeString": "struct PaymentStream.PaymentToken[]"
                                     }
                                 },
                                 "visibility": "internal"
@@ -1022,7 +1022,7 @@
                                 "body": {
                                     "id": 17,
                                     "nodeType": "Block",
-                                    "src": "290:10:0",
+                                    "src": "291:10:0",
                                     "statements": []
                                 },
                                 "id": 18,
@@ -1036,16 +1036,16 @@
                                     "id": 15,
                                     "nodeType": "ParameterList",
                                     "parameters": [],
-                                    "src": "287:2:0"
+                                    "src": "288:2:0"
                                 },
                                 "returnParameters": {
                                     "id": 16,
                                     "nodeType": "ParameterList",
                                     "parameters": [],
-                                    "src": "290:0:0"
+                                    "src": "291:0:0"
                                 },
                                 "scope": 36,
-                                "src": "276:24:0",
+                                "src": "277:24:0",
                                 "stateMutability": "nonpayable",
                                 "virtual": false,
                                 "visibility": "public"
@@ -1054,7 +1054,7 @@
                                 "body": {
                                     "id": 34,
                                     "nodeType": "Block",
-                                    "src": "382:128:0",
+                                    "src": "383:128:0",
                                     "statements": [
                                         {
                                             "expression": {
@@ -1067,7 +1067,7 @@
                                                                 "nodeType": "Identifier",
                                                                 "overloadedDeclarations": [],
                                                                 "referencedDeclaration": 20,
-                                                                "src": "443:6:0",
+                                                                "src": "444:6:0",
                                                                 "typeDescriptions": {
                                                                     "typeIdentifier": "t_address",
                                                                     "typeString": "address"
@@ -1079,7 +1079,7 @@
                                                                 "nodeType": "Identifier",
                                                                 "overloadedDeclarations": [],
                                                                 "referencedDeclaration": 22,
-                                                                "src": "477:12:0",
+                                                                "src": "478:12:0",
                                                                 "typeDescriptions": {
                                                                     "typeIdentifier": "t_uint256",
                                                                     "typeString": "uint256"
@@ -1102,10 +1102,10 @@
                                                             "nodeType": "Identifier",
                                                             "overloadedDeclarations": [],
                                                             "referencedDeclaration": 6,
-                                                            "src": "408:12:0",
+                                                            "src": "409:12:0",
                                                             "typeDescriptions": {
                                                                 "typeIdentifier": "t_type$_t_struct$_PaymentToken_$6_storage_ptr_$",
-                                                                "typeString": "type(struct PayentStream.PaymentToken storage pointer)"
+                                                                "typeString": "type(struct PaymentStream.PaymentToken storage pointer)"
                                                             }
                                                         },
                                                         "id": 31,
@@ -1119,11 +1119,11 @@
                                                             "totalAmount"
                                                         ],
                                                         "nodeType": "FunctionCall",
-                                                        "src": "408:93:0",
+                                                        "src": "409:93:0",
                                                         "tryCall": false,
                                                         "typeDescriptions": {
                                                             "typeIdentifier": "t_struct$_PaymentToken_$6_memory_ptr",
-                                                            "typeString": "struct PayentStream.PaymentToken memory"
+                                                            "typeString": "struct PaymentStream.PaymentToken memory"
                                                         }
                                                     }
                                                 ],
@@ -1131,7 +1131,7 @@
                                                     "argumentTypes": [
                                                         {
                                                             "typeIdentifier": "t_struct$_PaymentToken_$6_memory_ptr",
-                                                            "typeString": "struct PayentStream.PaymentToken memory"
+                                                            "typeString": "struct PaymentStream.PaymentToken memory"
                                                         }
                                                     ],
                                                     "expression": {
@@ -1140,10 +1140,10 @@
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [],
                                                         "referencedDeclaration": 14,
-                                                        "src": "393:9:0",
+                                                        "src": "394:9:0",
                                                         "typeDescriptions": {
                                                             "typeIdentifier": "t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage",
-                                                            "typeString": "struct PayentStream.PaymentToken storage ref[] storage ref"
+                                                            "typeString": "struct PaymentStream.PaymentToken storage ref[] storage ref"
                                                         }
                                                     },
                                                     "id": 27,
@@ -1153,10 +1153,10 @@
                                                     "lValueRequested": false,
                                                     "memberName": "push",
                                                     "nodeType": "MemberAccess",
-                                                    "src": "393:14:0",
+                                                    "src": "394:14:0",
                                                     "typeDescriptions": {
                                                         "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr_$_t_struct$_PaymentToken_$6_storage_$returns$__$bound_to$_t_array$_t_struct$_PaymentToken_$6_storage_$dyn_storage_ptr_$",
-                                                        "typeString": "function (struct PayentStream.PaymentToken storage ref[] storage pointer,struct PayentStream.PaymentToken storage ref)"
+                                                        "typeString": "function (struct PaymentStream.PaymentToken storage ref[] storage pointer,struct PaymentStream.PaymentToken storage ref)"
                                                     }
                                                 },
                                                 "id": 32,
@@ -1167,7 +1167,7 @@
                                                 "lValueRequested": false,
                                                 "names": [],
                                                 "nodeType": "FunctionCall",
-                                                "src": "393:109:0",
+                                                "src": "394:109:0",
                                                 "tryCall": false,
                                                 "typeDescriptions": {
                                                     "typeIdentifier": "t_tuple$__$",
@@ -1176,7 +1176,7 @@
                                             },
                                             "id": 33,
                                             "nodeType": "ExpressionStatement",
-                                            "src": "393:109:0"
+                                            "src": "394:109:0"
                                         }
                                     ]
                                 },
@@ -1186,7 +1186,7 @@
                                 "kind": "function",
                                 "modifiers": [],
                                 "name": "createPaymentStream",
-                                "nameLocation": "317:19:0",
+                                "nameLocation": "318:19:0",
                                 "nodeType": "FunctionDefinition",
                                 "parameters": {
                                     "id": 23,
@@ -1197,10 +1197,10 @@
                                             "id": 20,
                                             "mutability": "mutable",
                                             "name": "_owner",
-                                            "nameLocation": "345:6:0",
+                                            "nameLocation": "346:6:0",
                                             "nodeType": "VariableDeclaration",
                                             "scope": 35,
-                                            "src": "337:14:0",
+                                            "src": "338:14:0",
                                             "stateVariable": false,
                                             "storageLocation": "default",
                                             "typeDescriptions": {
@@ -1211,7 +1211,7 @@
                                                 "id": 19,
                                                 "name": "address",
                                                 "nodeType": "ElementaryTypeName",
-                                                "src": "337:7:0",
+                                                "src": "338:7:0",
                                                 "stateMutability": "nonpayable",
                                                 "typeDescriptions": {
                                                     "typeIdentifier": "t_address",
@@ -1225,10 +1225,10 @@
                                             "id": 22,
                                             "mutability": "mutable",
                                             "name": "_totalAmount",
-                                            "nameLocation": "361:12:0",
+                                            "nameLocation": "362:12:0",
                                             "nodeType": "VariableDeclaration",
                                             "scope": 35,
-                                            "src": "353:20:0",
+                                            "src": "354:20:0",
                                             "stateVariable": false,
                                             "storageLocation": "default",
                                             "typeDescriptions": {
@@ -1239,7 +1239,7 @@
                                                 "id": 21,
                                                 "name": "uint256",
                                                 "nodeType": "ElementaryTypeName",
-                                                "src": "353:7:0",
+                                                "src": "354:7:0",
                                                 "typeDescriptions": {
                                                     "typeIdentifier": "t_uint256",
                                                     "typeString": "uint256"
@@ -1248,27 +1248,27 @@
                                             "visibility": "internal"
                                         }
                                     ],
-                                    "src": "336:38:0"
+                                    "src": "337:38:0"
                                 },
                                 "returnParameters": {
                                     "id": 24,
                                     "nodeType": "ParameterList",
                                     "parameters": [],
-                                    "src": "382:0:0"
+                                    "src": "383:0:0"
                                 },
                                 "scope": 36,
-                                "src": "308:202:0",
+                                "src": "309:202:0",
                                 "stateMutability": "nonpayable",
                                 "virtual": false,
                                 "visibility": "public"
                             }
                         ],
                         "scope": 37,
-                        "src": "60:453:0",
+                        "src": "60:454:0",
                         "usedErrors": []
                     }
                 ],
-                "src": "33:480:0"
+                "src": "33:481:0"
             },
             "id": 0
         }
