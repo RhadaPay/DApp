@@ -25,6 +25,7 @@ contract RoundManager {
     struct Round {
         Status status;
         uint256 startTime;
+        uint256 totalVotes;
     }
 
     /* ============ State Variables ============ */
@@ -113,7 +114,8 @@ contract RoundManager {
         if(usersInRound[rounds.length - 1].length > 0) {
             rounds.push(Round({
                 status: Status.Open,
-                startTime: block.timestamp
+                startTime: block.timestamp,
+                totalVotes: 0
             }));
             uint256 roundID = rounds.length - 1;
             emit RoundOpened(roundID);
@@ -139,6 +141,7 @@ contract RoundManager {
         hasVoted[roundID][msg.sender] = true;
         for(uint256 i = 0; i < _for.length; i++) {
             numVotes[roundID][msg.sender] += weightedVoting[msg.sender]; // Add safe math later
+            rounds[roundID].totalVotes += weightedVoting[msg.sender];
         }
         emit VoteCast(roundID, msg.sender);
     }

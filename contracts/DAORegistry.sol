@@ -38,10 +38,10 @@ import "./Mock/MockPaymentStream.sol";
 contract DAORegistry is Ownable {
     /* ============ Datatypes ============ */
     struct DAO {
-        ContributorRegistry registry; // Probably don't need
+        ContributorRegistry contributorRegistry; // Probably don't need
         RoundManager roundManager;
         PaymentStream paymentStream;
-        EventStream eventStream; // Does this exist?
+        // EventStream eventStream; // Does this exist?
     }
 
     /* ============ State Variables ============ */
@@ -57,10 +57,27 @@ contract DAORegistry is Ownable {
     constructor () {
     }
 
-    function register() public {
+    /**
+     * Creates a new payment stream for the users from a specific round
+     * 
+     *
+     * @param roundID       The ID of the most recently closed round
+     *
+     */
+    function _createPaymentStream(address user, uint256 salary) private {
+
+    }
+
+    function register(uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed) public {
         daoList.push(DAO({
-            
+            contributorRegistry: (new ContributorRegistry(_requiredConfirmations)),
+            roundManager: (new RoundManager(msg.sender, _timePerRound, _timed)), // Shouldn't be msg.sender. Need workaround
+            paymentStream: (new PaymentStream())
         }));
         emit DaoRegistered(msg.sender);
+    }
+    
+    function calculateSalaries() public {
+        // Flow: calc total votes, input percentage into a for loop w createPaymentStream method
     }
 }
