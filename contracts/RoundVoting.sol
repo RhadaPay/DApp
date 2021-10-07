@@ -23,7 +23,7 @@ contract RoundManager {
 
     struct Round {
         Status status;
-        uint256 roundSalary;
+        uint256 startTime;
     }
 
     /* ============ State Variables ============ */
@@ -43,10 +43,12 @@ contract RoundManager {
     mapping(address => uint256) weightedVoting; // Use weighted voting identifier as way to communicate w registry about who can/can't vote
     // Timeout
     uint256 timePerRound;
+    // If the DAOs choose to consider time
+    bool timed;
 
     /* ============ Events ============ */
 
-    event RoundOpened(uint256 roundID, uint256 roundSalary);
+    event RoundOpened(uint256 roundID);
     event RoundOpenFailed();
     event RoundClosed(uint256 roundID, address closedBy);
     event VoteCast(uint256 roundID, address voter);
@@ -76,10 +78,11 @@ contract RoundManager {
 
     /* ============ Constructor ============ */
 
-    constructor(address registryAddress, uint256 _timePerRound) {
+    constructor(address registryAddress, uint256 _timePerRound, bool _timed) {
         registry = ContributorRegistry(registryAddress);
         admins.push(msg.sender);
         timePerRound = _timePerRound;
+        timed = _timed;
     }
 
     /* ============ Mutating Functions ============ */
@@ -90,34 +93,29 @@ contract RoundManager {
      * A new round opens with a given salary to be split  amongst the contributors following the voting period.
      * 
      *
-     * @param newUsers          Addresses of the proposed users to be eligible for votes 
-     * @param _roundSalary      The salary of the current round
+     * @param newUsers          Addresses of the proposed users to be eligible for votes
      *
      */
     function openRound(
-        address[] memory newUsers, uint256 _roundSalary
-    ) public payable isAdmin {
+        address[] memory newUsers
+    ) public isAdmin {
         // Check to see if only round open
         require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open);
-        // Deposit check
-        require(msg.value >= _roundSalary);
         // Checks to see if there are valid users in the passed array
         for(uint256 i = 0; i < newUsers.length; i++) {
-            /*
-            if(newUsers[i] in registry) {
-                validUsersInRound = true;
+            address tmpUser = newUsers[i];
+            if(registry.isValidVoter(tmpUser)) {
                 usersInRound[rounds.length - 1].push(newUsers[i]);
             }
-            */
         }
         // If there are valid users, then create a new round. Else, do not open a new round
         if(usersInRound[rounds.length - 1].length > 0) {
             rounds.push(Round({
                 status: Status.Open,
-                roundSalary: _roundSalary
+                startTime: block.timestamp
             }));
             uint256 roundID = rounds.length - 1;
-            emit RoundOpened(roundID, _roundSalary);
+            emit RoundOpened(roundID);
         } else {
             emit RoundOpenFailed();
         }
@@ -155,11 +153,17 @@ contract RoundManager {
      *
      */
     function closeRound(
-        uint256 roundID, Status _newStatus
+        uint256 roundID,
+        Status _newStatus
     ) public isAdmin {
+        // Check for round status
         require(rounds[roundID].status == Status.Open, "The voting block is not closed");
+        // Inputted round can only be either canceled or declared closed
         require(_newStatus != Status.Open, "Can only close or cancel a round");
+        // Changes the round status
         rounds[roundID].status = _newStatus;
-        // emit RoundClosed();
+        emit RoundClosed(roundID, msg.sender);
     }
+
+    /* ============ Getter Functions ============ */
 }
