@@ -1,31 +1,57 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ContributorRegistry.sol";
 import "./RoundVoting.sol";
 
+/* This is the Rhada parent contract. Here is the following flow:
+ * DAOs will register to join the Rhada protocol and will list the following:
+ *      - Address of the contract/user that will interact with the Rhada Protocol
+ *      - Funds/Fund type: funds can come later but addresses of the DAO's ERC20 token
+ * Upon registering,
+ *      - Will deploy a new ContributorRegistry contract specific to that DAO
+ *              - Manages devs, voting process for who is a contributor
+ *      - Will deploy a new RoundVoting contract specific to that DAO
+ *              - Manages rounds and voting on specific users in a round. Used to define how salary gets split
+ *              - Possible (and probably necessary) feature: rewards DAO members for participating
+ *      - Will deploy a PaymentStream contract specific to that DAO
+ *              -
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ 
+
+*/
+
+
 contract DAORegistry is Ownable {
     /* ============ Datatypes ============ */
+    enum Status {NONE, REGISTERED, CONFIRMED}
     struct DAO {
-        address daoAddress;
-        string daoName;
-        bool approved; // my idea for this is that a member of Rhada can change the value of this field to approve a DAO application
-        address roundManager; // take out
-        address[] admins;
-        address[] members;         // a list of members of the DAO. Should this be included here?
+        Status status;
+
     }
 
     /* ============ State Variables ============ */
     // List of DAOs
-    DAO[] public DAOs;
-    // list of Contributors in a DAO (will have to think of a method to expose this list)
-    Contributor[] contributors;
-    // The streaming instance of a DAO
-    // PaymentStream public stream;
-    // The voting rounds of a DAO
-    RoundVoting public round;
-    // The registry of a DAO
-    ContributorRegistry public registry;
+    DAO[] public list;
+    // Mapping of DAO to Voting contract
+    mapping(address => address) public daoToVoting;
+    // Mapping of DAO to Contributor Registry
+    mapping(address =>)
 
     /**
         Constructor Function
@@ -39,28 +65,8 @@ contract DAORegistry is Ownable {
         round = RoundVoting(roundAddress);
         registry = ContributorRegistry(registryAddress);
     }
+/*
 
-    /* Private Functions */ 
-
-    function registerDAO() {
-
-    }
-
-    function updateStream() {
-
-    }
-
-    function what daos am I in() {
-
-    }
-
-    /**
-        This is a validation check for when a user selects a DAO in the front end to ensure they are actually a member of the DAO.
-        Another option to do this is to emit a memberlist in the registry and check that member list for x address.
-     */
-    function isMemberOf() {
-
-    }
-
-
+    
+*/
 }
