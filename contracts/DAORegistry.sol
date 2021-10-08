@@ -107,10 +107,4 @@ contract DAORegistry is Ownable {
             }
         }
     }
-
-    function regUser(uint256 daoID) public {
-        // Need lots of require statements
-        // if has token, gets weight proportional to total currently in us tokens?
-        // roundManager . weightedVoting . inc by (proportional weight)
-    }
 }
