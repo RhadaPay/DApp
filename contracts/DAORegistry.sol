@@ -104,7 +104,7 @@ contract DAORegistry is Ownable {
             uint256 tmpUserVotes = daoList[daoID].roundManager.numVotes(roundID, tmpUser);
             uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;
             userPaidForRound[roundID][tmpUser] = true;
-            if(hasSalary[tmpUser]) {
+            if(!hasSalary[tmpUser]) {
                 _createPaymentStream(daoID, tmpUser, salaryPercentage);
             } else {
                 _adjustPaymentStream(daoID, tmpUser, salaryPercentage);
