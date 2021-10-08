@@ -170,4 +170,12 @@ contract RoundManager {
     }
 
     /* ============ Getter Functions ============ */
+
+    function getRoundVotes(uint256 roundID) public view returns(uint256) {
+        return rounds[roundID].totalVotes;
+    }
+
+    function getRoundUsers(uint256 roundID) public view returns(address[] memory) {
+        return usersInRound[roundID];
+    }
 }
