@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ContributorRegistry.sol";
 import "./RoundManager.sol";
-import "./Mock/MockEventStream.sol";
 import "./Mock/MockPaymentStream.sol";
 
 /* This is the Rhada parent contract. Here is the following flow:
@@ -20,8 +19,6 @@ import "./Mock/MockPaymentStream.sol";
  *              - Possible (and probably necessary) feature: rewards DAO members for participating
  *      - Will deploy a PaymentStream contract specific to that DAO
  *              - Controls the setting up of payments
- *      - Will deploy an EventStream contract specific to that DAO
- *              - Controls monitoring of no idea
  * DAO parent address will map to address of each one
  * Contracts compiles data from all of them
  *      - ContributorRegistry
@@ -42,7 +39,6 @@ contract DAORegistry is Ownable {
         ContributorRegistry contributorRegistry; // Probably don't need b/c used in roundManager, RM has sufficient checks. Still need to deploy though
         RoundManager roundManager;
         PaymentStream paymentStream;
-        // EventStream eventStream; // Does this exist?
         uint256 salaryPerRound;
         uint256 salaryPeriod;
     }
@@ -104,7 +100,7 @@ contract DAORegistry is Ownable {
             uint256 tmpUserVotes = daoList[daoID].roundManager.numVotes(roundID, tmpUser);
             uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;
             userPaidForRound[roundID][tmpUser] = true;
-            if(hasSalary[tmpUser]) {
+            if(!hasSalary[tmpUser]) {
                 _createPaymentStream(daoID, tmpUser, salaryPercentage);
             } else {
                 _adjustPaymentStream(daoID, tmpUser, salaryPercentage);

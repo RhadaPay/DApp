@@ -51,7 +51,6 @@ contract RoundManager {
     /* ============ Events ============ */
 
     event RoundOpened(uint256 roundID);
-    event RoundOpenFailed();
     event RoundClosed(uint256 roundID, address closedBy);
     event VoteCast(uint256 roundID, address voter);
 
@@ -102,7 +101,7 @@ contract RoundManager {
         address[] memory newUsers
     ) public isAdmin {
         // Check to see if only round open
-        require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open);
+        require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open, "All prior rounds must be closed");
         // Checks to see if there are valid users in the passed array
         for(uint256 i = 0; i < newUsers.length; i++) {
             address tmpUser = newUsers[i];
@@ -111,17 +110,14 @@ contract RoundManager {
             }
         }
         // If there are valid users, then create a new round. Else, do not open a new round
-        if(usersInRound[rounds.length - 1].length > 0) {
-            rounds.push(Round({
-                status: Status.Open,
-                startTime: block.timestamp,
-                totalVotes: 0
-            }));
-            uint256 roundID = rounds.length - 1;
-            emit RoundOpened(roundID);
-        } else {
-            emit RoundOpenFailed();
-        }
+        require(usersInRound[rounds.length - 1].length > 0, "There must be a valid user");
+        rounds.push(Round({
+            status: Status.Open,
+            startTime: block.timestamp,
+            totalVotes: 0
+        }));
+        uint256 roundID = rounds.length - 1;
+        emit RoundOpened(roundID);
     }
 
     /**
