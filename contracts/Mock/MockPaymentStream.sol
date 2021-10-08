@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 contract PaymentStream {
     struct PaymentToken {
-        address owner;
+        address tokenOwner;
         uint256 totalAmount;
+        uint256 salaryPeriod;
     }
 
     mapping(address => uint256) public userToPaymentStream; 
@@ -15,10 +16,16 @@ contract PaymentStream {
 
     }
 
-    function createPaymentStream(address _owner, uint256 _totalAmount) public {
+    function createPaymentStream(address _tokenOwner, uint256 _totalAmount, uint256 _salaryPeriod) public {
         tokenList.push(PaymentToken({
-            owner: _owner,
-            totalAmount: _totalAmount
+            tokenOwner: _tokenOwner,
+            totalAmount: _totalAmount,
+            salaryPeriod: _salaryPeriod
         }));
+    }
+
+    function adjustPaymentStream(address _tokenOwner, uint256 newAmount) public {
+        uint256 id = userToPaymentStream[_tokenOwner];
+        tokenList[id].totalAmount = newAmount;
     }
 }

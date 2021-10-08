@@ -43,6 +43,7 @@ contract DAORegistry is Ownable {
         PaymentStream paymentStream;
         // EventStream eventStream; // Does this exist?
         uint256 salaryPerRound;
+        uint256 salaryPeriod;
     }
 
     /* ============ State Variables ============ */
@@ -53,7 +54,10 @@ contract DAORegistry is Ownable {
     // Mapping of DAO object to parent address
     mapping(uint256 => address) public daoToAddress; // Need? Might remove later if we can't find a good front/backend use case for
     // Mapping of address to bool. True if already have salary. False otherwise. -> adjust payment if already have
+    mapping(address => bool) public hasSalary;
     // Mapping of round number to address to bool. True if already paid for round. False otherwise.
+    mapping(uint256 => mapping(address => bool)) public userPaidForRound;
+    // Payment stream length
 
     event DaoRegistered(address parent);
 
@@ -64,25 +68,32 @@ contract DAORegistry is Ownable {
      * Creates a new payment stream for the users from a specific round
      * 
      *
-     * @param user       Address of the user who will be given a payment token
+     * @param _user       Address of the user who will be given a payment token
      *
      */
-    function _createPaymentStream(address user, uint256 salary) private {
-
+    function _createPaymentStream(uint256 daoID, address _user, uint256 _salary) private {
+        daoList[daoID].paymentStream.createPaymentStream(_user, _salary, daoList[daoID].salaryPeriod);
     }
 
-    function register(uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound) public {
+    function _adjustPaymentStream(uint256 daoID, address user, uint256 newSalary) private {
+        daoList[daoID].paymentStream.adjustPaymentStream(user, newSalary);
+    }
+
+    function register(uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
         daoList.push(DAO({
             contributorRegistry: (new ContributorRegistry(_requiredConfirmations)),
             roundManager: (new RoundManager(msg.sender, _timePerRound, _timed)), // Shouldn't be msg.sender. Need workaround
             paymentStream: (new PaymentStream()),
-            salaryPerRound: _salaryPerRound
+            salaryPerRound: _salaryPerRound,
+            salaryPeriod: _salaryPeriod
+
         }));
         emit DaoRegistered(msg.sender);
     }
 
     // Yes I know this is a disaster lol
-    function calculateSalaries(uint256 daoID, uint256 roundID) public {
+    function calculateSalaries(uint256 daoID) public {
+        uint256 roundID = daoList[daoID].roundManager.getRoundNumber();
         // Logic should probably be moved elsewhere
         uint256 totalVotes = daoList[daoID].roundManager.getRoundVotes(roundID);
         address[] memory tmpUsers = daoList[daoID].roundManager.getRoundUsers(roundID);
@@ -91,15 +102,12 @@ contract DAORegistry is Ownable {
             address tmpUser = tmpUsers[i];
             uint256 tmpUserVotes = daoList[daoID].roundManager.numVotes(roundID, tmpUser);
             uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;
-            // userPaidForRound[roundID][tmpUser] = true;
-            // if(userHasStreamingToken[roundID][tmpUser]) {
-            _createPaymentStream(tmpUser, salaryPercentage);
-           // } else {
-            // _adjustSalary(tmpUser, salaryPercentage)
-           // }
-
+            userPaidForRound[roundID][tmpUser] = true;
+            if(hasSalary[tmpUser]) {
+                _createPaymentStream(daoID, tmpUser, salaryPercentage);
+            } else {
+                _adjustPaymentStream(daoID, tmpUser, salaryPercentage);
+            }
         }
-
-        
     }
 }
