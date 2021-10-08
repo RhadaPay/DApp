@@ -14,6 +14,7 @@ import "./Mock/MockPaymentStream.sol";
  * Upon registering,
  *      - Will deploy a new ContributorRegistry contract specific to that DAO
  *              - Manages devs, voting process for who is a contributor
+ *              - Need to launch here, don't need in struct. RoundManager uses its data, not this contract
  *      - Will deploy a new RoundVoting contract specific to that DAO
  *              - Manages rounds and voting on specific users in a round. Used to define how salary gets split
  *              - Possible (and probably necessary) feature: rewards DAO members for participating
@@ -109,5 +110,11 @@ contract DAORegistry is Ownable {
                 _adjustPaymentStream(daoID, tmpUser, salaryPercentage);
             }
         }
+    }
+
+    function regUser(uint256 daoID) public {
+        // Need lots of require statements
+        // if has token, gets weight proportional to total currently in us tokens?
+        // roundManager . weightedVoting . inc by (proportional weight)
     }
 }
