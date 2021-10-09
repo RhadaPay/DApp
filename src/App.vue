@@ -11,7 +11,8 @@
         <v-slide-x-reverse-transition appear>
           <div class="d-flex">
             <div class="d-flex align-center ms-8">
-              <!-- <connect-button /> -->
+              <v-chip v-if="isAdmin" color="warning" class="mx-5 px-5">ADMIN</v-chip>
+              <connect-button />
             </div>
           </div>
         </v-slide-x-reverse-transition>
@@ -44,17 +45,24 @@
     </v-main>
   </v-app>
 </template>
-<script setup lang="ts">
-// import ConnectButton from "./components/ConnectButton.vue";
-import { ref } from "vue";
-const drawer = ref(true);
-const errorType = ref(null);
-const items = ref([
-  { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
-  { icon: "mdi-format-list-bulleted-square", title: "Contributor List", to: "/contributors" },
-  { icon: "mdi-home", title: "Home", to: "/" },
-  { icon: "mdi-vote", title: "Vote", to: "/vote" },
-  { icon: "mdi-building", title: "DAO", to: "/" },
-  { icon: "mdi-money", title: "Payments", to: "/" },
-]);
+<script lang="ts">
+import ConnectButton from "./components/ConnectButton.vue";
+import { defineComponent } from 'vue'
+export default defineComponent({
+  components: { ConnectButton },
+  data: () => ({
+    drawer: true,
+    errorType: null,
+    isAdmin: true,
+    items: [
+      { icon: "mdi-home", title: "Home", to: "/" },
+      { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
+      { icon: "mdi-format-list-bulleted-square", title: "Contributor List", to: "/contributors" },
+      { icon: "mdi-vote", title: "Vote", to: "/vote" },      
+    ]
+  }),
+  async mounted() {
+    // get the admin status of the user
+  }
+});
 </script>

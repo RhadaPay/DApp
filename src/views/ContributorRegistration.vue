@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ContributorRegistrationCard from "../components/ContributorRegistrationCard.vue";
 export default {
   components: { ContributorRegistrationCard },

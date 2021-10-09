@@ -1,5 +1,5 @@
 <template>
-    <v-card class="my-3">
+    <v-card :class="`my-3 ${selected ? 'border' : null}`">
         <v-container id="card-container">
             <v-row align="center">
                 <v-col cols="2">
@@ -20,10 +20,10 @@
                     </v-card-title>
                     <v-row class="ml-1" justify="start" align="center">
                         <v-col cols="1">
-                            <v-icon>mdi-discord</v-icon>
+                            <a :href="`https://discordapp.com/users/${person.discordHandle}`"><v-icon>mdi-discord</v-icon></a>
                         </v-col>
                         <v-col cols="1">
-                            <v-icon>mdi-github</v-icon>
+                            <a :href="`https://github.com/${person.githubUsername}`"><v-icon>mdi-github</v-icon></a>
                         </v-col>
                     </v-row>                 
                 </v-col>
@@ -32,7 +32,12 @@
                         <v-card-title primary-title>
                             {{ votes }} Votes
                         </v-card-title>
-                        <v-btn color="success">Vote</v-btn>
+                        <v-btn
+                            :color="selected ? 'warning' : 'success'"
+                            @click="select"
+                            >
+                            {{ selected ? 'Remove' : 'Add' }}
+                            </v-btn>
                     </v-row>
                 </v-col>                
             </v-row>
@@ -54,13 +59,26 @@ const props = defineProps({
 const { name, votes, registered } = toRefs(props.person);
 
 let image = ref('');
+const selected = ref(false);
+const emit = defineEmits(['select'])
+
+const select = (): void => {
+    selected.value = !selected.value;
+    emit('select', props.person.address);
+};
 
 onMounted(async () => {
-
     const _image = await apiCall('https://dog.ceo/api/breeds/image/random');
-    
-    console.debug({_image, props: props.person });
     image.value = _image.message;
 })
 
 </script>
+<style scoped lang="scss">
+.border {
+    border: 1px orange solid !important;
+    transition: 0.5s;
+}
+a {
+    text-decoration: none !important;
+}
+</style>

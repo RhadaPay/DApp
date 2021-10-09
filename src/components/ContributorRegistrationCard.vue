@@ -47,13 +47,11 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
+  data: () => ({
       loading: false,
-      discordHandle: "",
-      githubUsername: "",
-    };
-  },
+      discordHandle: "Not Found",
+      githubUsername: "Not Found",
+  }),
   methods: {
     ...mapActions("contributorRegistry", ["registerContributor"]),
     async register() {
@@ -63,8 +61,6 @@ export default {
           discordHandle: this.discordHandle,
           githubUsername: this.githubUsername,
         });
-        this.discordHandle = "";
-        this.githubUsername = "";
       } catch (e) {
         console.error("Contributor Registration failed with exception: ", e);
       } finally {

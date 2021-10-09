@@ -3,14 +3,21 @@ import "@nomiclabs/hardhat-ethers";
 import '@typechain/hardhat';
 import 'hardhat-deploy';
 
+require("dotenv").config();
+
 import { HardhatUserConfig } from "hardhat/config";
 
+function mnemonic(): string {
+  if ("MNEMONIC" in process.env) {
+    return process.env.MNEMONIC ?? ''
+  } else {
+    console.warn("WARNING: No mnemonic Set");
+    return ''
+  }
+}
 
 const config: HardhatUserConfig =  {
-  defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {},
-  },
+  defaultNetwork: "matic",
   solidity: {
     version: "0.8.0",
     settings: {
@@ -20,6 +27,14 @@ const config: HardhatUserConfig =  {
       }
     }
   },
+  networks: {
+    matic: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+    },
+  },  
   paths: {
     sources: "./contracts",
     tests: "./test",

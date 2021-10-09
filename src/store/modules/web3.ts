@@ -30,6 +30,7 @@ const getters: GetterTree<Web3State, any> = {
   },
   [Web3Getters.getChainId](state) {
     return state.chainId;
+    // return "80001"
   },
   [Web3Getters.getChainName](state) {
     return state.chainName;

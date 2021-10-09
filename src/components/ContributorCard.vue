@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto my-12" max-width="500">
-    <v-card-title>{{ address }}</v-card-title>
+    <v-card-subtitle class="my-5 text-orange">{{ address }}</v-card-subtitle>
+    <v-divider/>
     <v-card-text>
       <v-list-item>
         <v-list-item-content>

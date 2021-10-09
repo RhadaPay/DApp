@@ -19,11 +19,10 @@ const getters = {
 const actions = {
   connectContract({ rootGetters }) {
     const provider = rootGetters[`web3/${Web3Getters.getProviderEthers}`];
-    const chainIdDec = parseInt(
-      rootGetters[`web3/${Web3Getters.getChainId}`]
-    ).toString() as ChainId;
+    const chainId =  rootGetters[`web3/${Web3Getters.getChainId}`];
+    const chainIdDec = parseInt(chainId).toString() as ChainId;
     const address = addresses.ContributorRegistry[chainIdDec];
-    console.log("Retrieved contract address: ", address);
+    console.debug({ Web3Getters, address, chainIdDec, provider,  chainId, rootGetters });
     if (address === undefined) {
       console.error(
         `Contributor Registry not deployed on chainId ${chainIdDec}`
