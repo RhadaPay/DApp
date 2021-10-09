@@ -11,7 +11,7 @@
         <v-slide-x-reverse-transition appear>
           <div class="d-flex">
             <div class="d-flex align-center ms-8">
-              <connect-button />
+              <!-- <connect-button /> -->
             </div>
           </div>
         </v-slide-x-reverse-transition>
@@ -29,7 +29,7 @@
             exact
             style="z-index: 1000"
           >
-            <v-list-item-action>
+            <v-list-item-action class="mr-5">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
@@ -45,11 +45,16 @@
   </v-app>
 </template>
 <script setup lang="ts">
-import ConnectButton from "./components/ConnectButton.vue";
+// import ConnectButton from "./components/ConnectButton.vue";
 import { ref } from "vue";
 const drawer = ref(true);
+const errorType = ref(null);
 const items = ref([
   { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
   { icon: "mdi-format-list-bulleted-square", title: "Contributor List", to: "/contributors" },
+  { icon: "mdi-home", title: "Home", to: "/" },
+  { icon: "mdi-vote", title: "Vote", to: "/vote" },
+  { icon: "mdi-building", title: "DAO", to: "/" },
+  { icon: "mdi-money", title: "Payments", to: "/" },
 ]);
 </script>
