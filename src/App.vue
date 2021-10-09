@@ -52,5 +52,7 @@ const errorType = ref(null);
 const items = ref([
   { icon: "mdi-home", title: "Home", to: "/" },
   { icon: "mdi-vote", title: "Vote", to: "/vote" },
+  { icon: "mdi-building", title: "DAO", to: "/" },
+  { icon: "mdi-money", title: "Payments", to: "/" },
 ]);
 </script>
