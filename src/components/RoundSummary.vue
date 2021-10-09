@@ -5,7 +5,7 @@
             </v-card-title>
         <v-divider/>
                 <v-card-text>
-                    Votes {{ props.votes }}, Selected {{ selected?.length }} Members
+                    Votes {{ props.votes ?? 0 }}, Selected {{ selected?.length }} Members
                 </v-card-text>
                 <v-card-text v-if="voted">
                     You have already voted this round
@@ -22,6 +22,7 @@
                     >Close Round</v-btn>
                     <v-btn
                         @click="vote"
+                        :disabled="props.selected?.length === 0"
                         color="success"
                     >Vote</v-btn>                    
                 </v-card-actions>
@@ -37,7 +38,7 @@ const props = defineProps({
 const isAdmin = ref(true);
 const round = ref(1);
 const when = ref('3 Days');
-const voted = ref(true);
+const voted = ref(false);
 
 const emits = defineEmits(['close-round', 'vote']);
 

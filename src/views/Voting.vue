@@ -20,6 +20,7 @@ import RoundSummary from '../components/RoundSummary.vue'
 import { Person, Member } from "@/types/Person"
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
+import { Web3Getters } from '@/types/store/Web3'
 
 
 export default defineComponent({
@@ -42,7 +43,7 @@ export default defineComponent({
             await this.$store.dispatch('vote/vote', {
                 roundId: 0,
                 addressesFor: this.selected,
-                addressFrom: ''
+                addressFrom: this.$store.getters[`web3/${Web3Getters.getActiveAccount}`],
             })
         },
 
@@ -50,7 +51,7 @@ export default defineComponent({
             console.debug('Close Round');
             await this.$store.dispatch('vote/closeRound', {
                 roundId: 0,
-                address: ''
+                address: this.$store.getters[`web3/${Web3Getters.getActiveAccount}`],
             })
         },
 
@@ -64,7 +65,9 @@ export default defineComponent({
         },
 
         async getMemberVotes (): Promise<void> {
-            this.memberVotes = await this.$store.dispatch('vote/getVotes');
+            this.memberVotes = await this.$store.dispatch(
+                'vote/getVotes', { roundId: 0, _for: this.selected }
+            );
         },
 
         getMembers (): Person[] {
@@ -75,7 +78,7 @@ export default defineComponent({
                 ...member,
                 name: member.discordHandle || member.githubUsername,
                 registered: new Date(),
-                votes: this.memberVotes.find(mv => mv.address === member.address),
+                votes: this.memberVotes.find(mv => mv.address === member.address) ?? 0,
                 })
             )
 

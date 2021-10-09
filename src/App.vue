@@ -11,7 +11,8 @@
         <v-slide-x-reverse-transition appear>
           <div class="d-flex">
             <div class="d-flex align-center ms-8">
-              <v-chip v-if="isAdmin" color="warning" class="mx-5 px-5">ADMIN</v-chip>
+              <v-chip v-if="isAdmin" color="warning" class="mx-0 px-5">ADMIN</v-chip>
+              <v-chip v-if="isConfirmed" color="secondary" class="mx-3 px-5">CONFIRMED USER</v-chip>
               <connect-button />
             </div>
           </div>
@@ -54,6 +55,7 @@ export default defineComponent({
     drawer: true,
     errorType: null,
     isAdmin: true,
+    isConfirmed: true,
     items: [
       { icon: "mdi-home", title: "Home", to: "/" },
       { icon: "mdi-plus-box", title: "Contributor Registration", to: "/register" },
