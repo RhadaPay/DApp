@@ -36,6 +36,7 @@ import "./PaymentStream.sol";
 contract DAORegistry is Ownable {
     /* ============ Datatypes ============ */
     struct DAO {
+        string name;
         ContributorRegistry contributorRegistry; // Probably don't need b/c used in roundManager, RM has sufficient checks. Still need to deploy though
         RoundManager roundManager;
         PaymentStream paymentStream;
@@ -56,7 +57,7 @@ contract DAORegistry is Ownable {
     mapping(uint256 => mapping(address => bool)) public userPaidForRound;
     // Payment stream length
 
-    event DaoRegistered(address parent);
+    event DaoRegistered(string name, uint256 daoId, address parent);
 
     IConstantFlowAgreementV1 private _cfa;
     ISuperfluid private _host;
@@ -67,8 +68,9 @@ contract DAORegistry is Ownable {
     }
 
 
-    function register(uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
+    function register(string memory name, uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
         daoList.push(DAO({
+            name: name,
             contributorRegistry: (new ContributorRegistry(_requiredConfirmations)),
             roundManager: (new RoundManager(msg.sender, _timePerRound, _timed)), // Shouldn't be msg.sender. Need workaround
             paymentStream: (new PaymentStream(_cfa, _host, msg.sender)),
@@ -76,12 +78,9 @@ contract DAORegistry is Ownable {
             salaryPeriod: _salaryPeriod
 
         }));
-        emit DaoRegistered(msg.sender);
+        emit DaoRegistered(name, daoList.length , msg.sender);
     }
 
-    function getPaymentContractAddress(uint256 daoID) public returns(address){
-        return address(daoList[daoID].paymentStream);
-    }
 
     function distributeSalaries(uint256 daoID) public {
         uint256 roundID = daoList[daoID].roundManager.getRoundNumber();
