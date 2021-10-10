@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ContributorRegistry.sol";
 import "./RoundManager.sol";
-import "./Mock/MockPaymentStream.sol";
+import "./PaymentStream.sol";
 
 /* This is the Rhada parent contract. Here is the following flow:
  * DAOs will register to join the Rhada protocol and will list the following:
@@ -58,29 +58,20 @@ contract DAORegistry is Ownable {
 
     event DaoRegistered(address parent);
 
-    constructor () {
+    IConstantFlowAgreementV1 private _cfa;
+    ISuperfluid private _host;
+
+    constructor (IConstantFlowAgreementV1 cfa, ISuperfluid superfluid) {
+        _cfa = cfa;
+        _host = superfluid;
     }
 
-    /**
-     * Creates a new payment stream for the users from a specific round
-     * 
-     *
-     * @param _user       Address of the user who will be given a payment token
-     *
-     */
-    function _createPaymentStream(uint256 daoID, address _user, uint256 _salary) private {
-        daoList[daoID].paymentStream.createPaymentStream(_user, _salary, daoList[daoID].salaryPeriod);
-    }
-
-    function _adjustPaymentStream(uint256 daoID, address user, uint256 newSalary) private {
-        daoList[daoID].paymentStream.adjustPaymentStream(user, newSalary);
-    }
 
     function register(uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
         daoList.push(DAO({
             contributorRegistry: (new ContributorRegistry(_requiredConfirmations)),
             roundManager: (new RoundManager(msg.sender, _timePerRound, _timed)), // Shouldn't be msg.sender. Need workaround
-            paymentStream: (new PaymentStream()),
+            paymentStream: (new PaymentStream(_cfa, _host, msg.sender)),
             salaryPerRound: _salaryPerRound,
             salaryPeriod: _salaryPeriod
 
@@ -88,23 +79,19 @@ contract DAORegistry is Ownable {
         emit DaoRegistered(msg.sender);
     }
 
-    // Yes I know this is a disaster lol
     function calculateSalaries(uint256 daoID) public {
         uint256 roundID = daoList[daoID].roundManager.getRoundNumber();
         // Logic should probably be moved elsewhere
         uint256 totalVotes = daoList[daoID].roundManager.getRoundVotes(roundID);
         address[] memory tmpUsers = daoList[daoID].roundManager.getRoundUsers(roundID);
-
+        uint256[] memory votesPerUser;
         for(uint256 i = 0; i < tmpUsers.length; i++) {
             address tmpUser = tmpUsers[i];
             uint256 tmpUserVotes = daoList[daoID].roundManager.numVotes(roundID, tmpUser);
             uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;
-            userPaidForRound[roundID][tmpUser] = true;
-            if(!hasSalary[tmpUser]) {
-                _createPaymentStream(daoID, tmpUser, salaryPercentage);
-            } else {
-                _adjustPaymentStream(daoID, tmpUser, salaryPercentage);
-            }
+            votesPerUser[i] = salaryPercentage;
         }
+        daoList[daoID].paymentStream.setUserScores(tmpUsers, votesPerUser);
+        daoList[daoID].paymentStream.updatePayments();
     }
 }
