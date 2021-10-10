@@ -79,7 +79,11 @@ contract DAORegistry is Ownable {
         emit DaoRegistered(msg.sender);
     }
 
-    function calculateSalaries(uint256 daoID) public {
+    function getPaymentContractAddress(uint256 daoID) public returns(address){
+        return address(daoList[daoID].paymentStream);
+    }
+
+    function distributeSalaries(uint256 daoID) public {
         uint256 roundID = daoList[daoID].roundManager.getRoundNumber();
         // Logic should probably be moved elsewhere
         uint256 totalVotes = daoList[daoID].roundManager.getRoundVotes(roundID);
