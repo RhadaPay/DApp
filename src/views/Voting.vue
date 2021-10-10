@@ -86,7 +86,8 @@ export default defineComponent({
 
         return _members.sort((a, b) => b.votes - a.votes);
     }},
-    async mounted() {
+    async mounted(): Promise<void> {
+        await this.$store.dispatch('vote/getContract');
         await this.getMemberVotes();
         const _members = this.getMembers();
         this.members = _members;
