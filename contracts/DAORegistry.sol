@@ -69,11 +69,13 @@ contract DAORegistry is Ownable {
 
 
     function register(string memory name, uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
+        ContributorRegistry newRegistry = new ContributorRegistry(_requiredConfirmations);
+        PaymentStream newPaymentStream = new PaymentStream(_cfa, _host, msg.sender);
         daoList.push(DAO({
             name: name,
-            contributorRegistry: (new ContributorRegistry(_requiredConfirmations)),
-            roundManager: (new RoundManager(msg.sender, _timePerRound, _timed)), // Shouldn't be msg.sender. Need workaround
-            paymentStream: (new PaymentStream(_cfa, _host, msg.sender)),
+            contributorRegistry: newRegistry,
+            roundManager: (new RoundManager(address(newRegistry), address(newPaymentStream), _timePerRound, _timed)),
+            paymentStream: newPaymentStream,
             salaryPerRound: _salaryPerRound,
             salaryPeriod: _salaryPeriod
 
