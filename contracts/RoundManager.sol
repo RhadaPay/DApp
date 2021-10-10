@@ -85,7 +85,7 @@ contract RoundManager {
 
     constructor(address registryAddress, address _paymentStreams, uint256 _timePerRound, bool _timed) {
         registry = IContributorRegistry(registryAddress);
-        paymentStreams = IPaymentStream(paymentStreams);
+        paymentStreams = IPaymentStream(_paymentStreams);
         admins.push(msg.sender);
         timePerRound = _timePerRound;
         timed = _timed;
