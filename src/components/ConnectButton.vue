@@ -28,7 +28,6 @@ import { useStore } from "vuex";
 import { key } from "../store";
 
 const store = useStore(key);
-console.log("store", store);
 
 const getActiveAccount = computed(() => store.getters[`web3/${Web3Getters.getActiveAccount}`]);
 const getWeb3Modal = computed(() => store.getters[`web3/${Web3Getters.getWeb3Modal}`]);
@@ -43,7 +42,7 @@ async function disconnectWeb3Modal() {
 }
 
 onMounted(async () => {
-  // await store.dispatch(`web3/${Web3Actions.initWeb3Modal}`);
-  // await store.dispatch(`web3/${Web3Actions.ethereumListener}`);
+  await store.dispatch(`web3/${Web3Actions.initWeb3Modal}`);
+  await store.dispatch(`web3/${Web3Actions.ethereumListener}`);
 });
 </script>

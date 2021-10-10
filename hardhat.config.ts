@@ -4,6 +4,8 @@ import '@typechain/hardhat';
 import 'hardhat-deploy';
 import "@nomiclabs/hardhat-etherscan";
 
+require("dotenv").config();
+
 import { HardhatUserConfig } from "hardhat/config";
 
 require("dotenv").config();
@@ -26,7 +28,7 @@ const config: HardhatUserConfig =  {
         runs: 1
       }
     }
-  },
+  },  
   paths: {
     sources: "./contracts",
     tests: "./test",

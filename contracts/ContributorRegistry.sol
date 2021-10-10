@@ -85,7 +85,7 @@ contract ContributorRegistry is Ownable, IVoterRegistry{
         emit ConfirmationVote(_contributorAddress, msg.sender, contributor.numConfirmationVotes);
 
         if(contributor.numConfirmationVotes >= requiredConfirmations || msg.sender == owner()){
-            contributor.status == Status.CONFIRMED;
+            contributor.status = Status.CONFIRMED;
             emit ContributorConfirmed(_contributorAddress);
         }
     }
