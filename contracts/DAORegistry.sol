@@ -78,7 +78,7 @@ contract DAORegistry is Ownable {
             salaryPeriod: _salaryPeriod
 
         }));
-        emit DaoRegistered(name, daoList.length , msg.sender);
+        emit DaoRegistered(name, daoList.length - 1, msg.sender);
     }
 
 
