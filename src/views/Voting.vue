@@ -55,6 +55,11 @@ export default defineComponent({
             })
         },
 
+        async openRound (): Promise<void> {
+            console.debug('Open Round');
+            await this.$store.dispatch('vote/openRound')
+        },
+
         toggleSelected (name: string): void {
             if (this.selected.includes(name)) {
                 this.selected = this.selected.filter(s => s !== name);
@@ -66,7 +71,8 @@ export default defineComponent({
 
         async getMemberVotes (): Promise<void> {
             this.memberVotes = await this.$store.dispatch(
-                'vote/getVotes', { roundId: 0, _for: this.selected }
+                'vote/getVotes', { roundId: 0, _for: this.getRegisteredContributors
+                .filter((cont: { statusId: number }) => cont.statusId === 2).map((usr) => usr.address) }
             );
         },
 
@@ -78,7 +84,7 @@ export default defineComponent({
                 ...member,
                 name: member.discordHandle || member.githubUsername,
                 registered: new Date(),
-                votes: this.memberVotes.find(mv => mv.address === member.address) ?? 0,
+                votes: this.memberVotes.find(mv => mv.address === member.address).votesThisRound ?? 0,
                 })
             )
 

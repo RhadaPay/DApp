@@ -83,10 +83,10 @@ contract RoundManager {
 
     /* ============ Constructor ============ */
 
-    constructor(address registryAddress, address _paymentStreams, uint256 _timePerRound, bool _timed) {
+    constructor(address registryAddress, address _paymentStreams, uint256 _timePerRound, bool _timed, address adminAddr) {
         registry = IContributorRegistry(registryAddress);
         paymentStreams = IPaymentStream(_paymentStreams);
-        admins.push(msg.sender);
+        admins.push(adminAddr);
         timePerRound = _timePerRound;
         timed = _timed;
     }
@@ -108,20 +108,21 @@ contract RoundManager {
         // Check to see if only round open
         require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open, "All prior rounds must be closed");
         // Checks to see if there are valid users in the passed array
+        uint256 roundID = rounds.length == 0 ?  0 :  rounds.length - 1;
         for(uint256 i = 0; i < newUsers.length; i++) {
             address tmpUser = newUsers[i];
             if(registry.isValidVoter(tmpUser)) {
-                usersInRound[rounds.length - 1].push(newUsers[i]);
+                usersInRound[roundID].push(newUsers[i]);
             }
         }
+
         // If there are valid users, then create a new round. Else, do not open a new round
-        require(usersInRound[rounds.length - 1].length > 0, "There must be a valid user");
+        require(usersInRound[roundID].length > 0, "There must be a valid user");
         rounds.push(Round({
             status: Status.Open,
             startTime: block.timestamp,
             totalVotes: 0
         }));
-        uint256 roundID = rounds.length - 1;
         emit RoundOpened(roundID);
     }
 
@@ -141,7 +142,7 @@ contract RoundManager {
     ) public canVote(roundID) roundState(roundID, Status.Open) {
         hasVoted[roundID][msg.sender] = true;
         for(uint256 i = 0; i < _for.length; i++) {
-            numVotes[roundID][msg.sender] += getWeightedVote(msg.sender); // Add safe math later
+            numVotes[roundID][_for[i]] += getWeightedVote(msg.sender); // Add safe math later
             rounds[roundID].totalVotes += getWeightedVote(msg.sender);
         }
         emit VoteCast(roundID, msg.sender);
@@ -160,7 +161,7 @@ contract RoundManager {
     function closeRound(
         uint256 roundID,
         Status _newStatus
-    ) public isAdmin {
+    ) public  isAdmin {
         // Check for round status
         require(rounds[roundID].status == Status.Open, "The voting block is not closed");
         // Inputted round can only be either canceled or declared closed

@@ -4,7 +4,7 @@ import { RoundManager } from "typechain"
 import { ActionTree, GetterTree, Module, MutationTree } from "vuex"
 import { RoundManager__factory } from "../../../typechain/factories/RoundManager__factory";
 
-const ROUND_MANAGER_CONTRACT = "0xD316eb3F1036c3D20537228Bff19DB709Bbd2bbe"
+const ROUND_MANAGER_CONTRACT = "0x31eD91E5194BA0074b94E5cd57b2Ac23020f7D39"
 declare global {
   interface Window {
     ethereum: {
@@ -63,7 +63,7 @@ const actions: ActionTree<VoteState, any> = {
         return true
     },
 
-    async getContract({ }): Promise<RoundManager> {
+    async getContract({}): Promise<RoundManager> {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         
@@ -74,6 +74,17 @@ const actions: ActionTree<VoteState, any> = {
         return _contract
     },
 
+    
+    async openRound (
+        { rootGetters, dispatch },
+    ): Promise<void> {
+        const contract: RoundManager = await dispatch('getContract');
+        let contributors = await rootGetters[`contributorRegistry/getRegisteredContributors`];
+        contributors = contributors.map( a => a.address)
+        console.log(contributors);
+        if (contract) await contract.openRound(contributors);
+    },
+
     async closeRound (
         { dispatch },
         { roundId, address }: { roundId: number, address: string }
@@ -81,7 +92,10 @@ const actions: ActionTree<VoteState, any> = {
         const CLOSED = 1;
         const contract: RoundManager = await dispatch('getContract');
         const isAdmin = await dispatch('checkAdmin', address);
-        if (contract && isAdmin) await contract.closeRound(roundId, CLOSED);
+        if (contract && isAdmin) {
+            //await contract.closeRound(roundId, CLOSED);
+            await contract.distributeSalaries();
+        }
     },
 
     async getVotes (

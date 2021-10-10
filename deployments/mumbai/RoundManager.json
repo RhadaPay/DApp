@@ -1,0 +1,689 @@
+{
+  "address": "0x31eD91E5194BA0074b94E5cd57b2Ac23020f7D39",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "registryAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_paymentStreams",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_timePerRound",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_timed",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "adminAddr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "closedBy",
+          "type": "address"
+        }
+      ],
+      "name": "RoundClosed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoundOpened",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        }
+      ],
+      "name": "VoteCast",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "admins",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_for",
+          "type": "address[]"
+        }
+      ],
+      "name": "castVote",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum RoundManager.Status",
+          "name": "_newStatus",
+          "type": "uint8"
+        }
+      ],
+      "name": "closeRound",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "distributeSalaries",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRoundNumber",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoundUsers",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoundVotes",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "roundID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoundVotesPerUser",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRounds",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "enum RoundManager.Status",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalVotes",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct RoundManager.Round[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getWeightedVote",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "hasVoted",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "numVotes",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "newUsers",
+          "type": "address[]"
+        }
+      ],
+      "name": "openRound",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "paymentStreams",
+      "outputs": [
+        {
+          "internalType": "contract IPaymentStream",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "registry",
+      "outputs": [
+        {
+          "internalType": "contract IContributorRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rounds",
+      "outputs": [
+        {
+          "internalType": "enum RoundManager.Status",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalVotes",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "usersInRound",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x43809a5313745167d7045af93d925921a5fe9686f77d127246f58e73425f1f49",
+  "receipt": {
+    "to": null,
+    "from": "0xAb9941a4f6c9Ddea1ee14db777c03b94BC60Da6f",
+    "contractAddress": "0x31eD91E5194BA0074b94E5cd57b2Ac23020f7D39",
+    "transactionIndex": 0,
+    "gasUsed": "1195925",
+    "logsBloom": "0x00000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018020000000000000000000000000000000000000000000000000000000800000000000000000000100000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000024000000000000000000001000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000500000",
+    "blockHash": "0x18e60b6abcd37554a6ee20fb51b096b6731e8111a933ee5316080720f99dc8f2",
+    "transactionHash": "0x43809a5313745167d7045af93d925921a5fe9686f77d127246f58e73425f1f49",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 20016227,
+        "transactionHash": "0x43809a5313745167d7045af93d925921a5fe9686f77d127246f58e73425f1f49",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x000000000000000000000000ab9941a4f6c9ddea1ee14db777c03b94bc60da6f",
+          "0x000000000000000000000000e4b8e9222704401ad16d4d826732953daf07c7e2"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000007f769fa0171c00000000000000000000000000000000000000000000000000072224a0e562464600000000000000000000000000000000000000000000000005788cef5837260000000000000000000000000000000000000000000000000006a2ae01454b2a4600000000000000000000000000000000000000000000000005f8038ef84e4200",
+        "logIndex": 0,
+        "blockHash": "0x18e60b6abcd37554a6ee20fb51b096b6731e8111a933ee5316080720f99dc8f2"
+      }
+    ],
+    "blockNumber": 20016227,
+    "cumulativeGasUsed": "1195925",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x4cc5d1e6a1Cd824b579030b14D36f36a1B4516a9",
+    "0x5fdCE9a4eA0195d95bAc2e8ecEdd3a1739C0CAc2",
+    1,
+    false,
+    "0xAb9941a4f6c9Ddea1ee14db777c03b94BC60Da6f"
+  ],
+  "solcInputHash": "9ea68684f2e385ffdf203b35c1331ba6",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"registryAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_paymentStreams\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_timePerRound\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"_timed\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"adminAddr\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"closedBy\",\"type\":\"address\"}],\"name\":\"RoundClosed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"}],\"name\":\"RoundOpened\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"}],\"name\":\"VoteCast\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"admins\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"_for\",\"type\":\"address[]\"}],\"name\":\"castVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"},{\"internalType\":\"enum RoundManager.Status\",\"name\":\"_newStatus\",\"type\":\"uint8\"}],\"name\":\"closeRound\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"distributeSalaries\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRoundNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"}],\"name\":\"getRoundUsers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"}],\"name\":\"getRoundVotes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"roundID\",\"type\":\"uint256\"}],\"name\":\"getRoundVotesPerUser\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRounds\",\"outputs\":[{\"components\":[{\"internalType\":\"enum RoundManager.Status\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"internalType\":\"struct RoundManager.Round[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getWeightedVote\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"hasVoted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"numVotes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"newUsers\",\"type\":\"address[]\"}],\"name\":\"openRound\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paymentStreams\",\"outputs\":[{\"internalType\":\"contract IPaymentStream\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"registry\",\"outputs\":[{\"internalType\":\"contract IContributorRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rounds\",\"outputs\":[{\"internalType\":\"enum RoundManager.Status\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"startTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"usersInRound\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"castVote(uint256,address[])\":{\"params\":{\"_for\":\"The salary of the current round\",\"roundID\":\"The ID of the round\"}},\"closeRound(uint256,uint8)\":{\"params\":{\"_newStatus\":\"The new status, either closed or canceled, for the given round\",\"roundID\":\"The ID of the round\"}},\"openRound(address[])\":{\"params\":{\"newUsers\":\"Addresses of the proposed users to be eligible for votes\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"castVote(uint256,address[])\":{\"notice\":\"Votes for users in a given round. Confirms that the function caller is eligible to vote for a round. The function caller casts his vote for the inputted addresses. \"},\"closeRound(uint256,uint8)\":{\"notice\":\"Closes a given round. Confirms that the given round is open. The function caller casts his vote for the inputted addresses. \"},\"openRound(address[])\":{\"notice\":\"Opens a new round. Confirms that there exist valid users passed to the function before opening a new round. A new round opens with a given salary to be split  amongst the contributors following the voting period. \"}},\"notice\":\"Simple implementation of a voting contract done on-chain. This contract allows confirmed members to place votes for a particular member. This contract exports the votes but does not define a strategy. Votes for registered users are placed in Rounds, and the round manager contract coordinates rounds for a particular DAO. Rounds are not currently time bound, they are flexible and minimal. TODO: Implement timer between rounds. Probably better on the frontend, but users may also want to block abuse Implement a timeout between rounds so that the parent contract has enough time to process everything (prevents abuse)\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/RoundManager.sol\":\"RoundManager\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1},\"remappings\":[]},\"sources\":{\"contracts/RoundManager.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\nimport \\\"./interfaces/IContributorRegistry.sol\\\";\\nimport \\\"./interfaces/IPaymentStream.sol\\\";\\n\\n/**\\n    Simple implementation of a voting contract done on-chain.\\n    This contract allows confirmed members to place votes for a particular member.\\n    This contract exports the votes but does not define a strategy.\\n    Votes for registered users are placed in Rounds, and the round manager contract coordinates rounds\\n    for a particular DAO.\\n    Rounds are not currently time bound, they are flexible and minimal.\\n\\n    TODO:\\n        * Implement timer between rounds. Probably better on the frontend, but users may also want to block abuse\\n        * Implement a timeout between rounds so that the parent contract has enough time to process everything (prevents abuse)\\n */\\ncontract RoundManager {\\n\\n    /* ============ Datatypes ============ */\\n    enum Status {\\n        Open,\\n        Completed,\\n        Cancelled\\n    }\\n\\n    struct Round {\\n        Status status;\\n        uint256 startTime;\\n        uint256 totalVotes;\\n    }\\n\\n    /* ============ State Variables ============ */\\n    // Stores rounds\\n    Round[] public rounds;\\n    // The registry of a specific DAO\\n    IContributorRegistry public registry;\\n    IPaymentStream public paymentStreams;\\n\\n    // List of addresses with admin privileges for a given DAO\\n    address[] public admins;\\n    // List of the addresses in the current round\\n    mapping(uint256 => address[]) public usersInRound;\\n    // Number of votes for a user in a given round\\n    mapping(uint256 => mapping(address => uint256)) public numVotes;\\n    // Mapping of round to those who have voted in that round\\n    mapping(uint256 => mapping(address => bool)) public hasVoted; // Or just map uint256 to address and iterate through?\\n    // TEMPORARY MAPPING\\n    mapping(address => uint256) weightedVoting; // Use weighted voting identifier as way to communicate w registry about who can/can't vote\\n    // Timeout\\n    uint256 timePerRound;\\n    // If the DAOs choose to consider time\\n    bool timed;\\n\\n    /* ============ Events ============ */\\n\\n    event RoundOpened(uint256 roundID);\\n    event RoundClosed(uint256 roundID, address closedBy);\\n    event VoteCast(uint256 roundID, address voter);\\n\\n    /* Modifiers */\\n\\n    modifier canVote(uint256 roundID) {\\n        require(!hasVoted[roundID][msg.sender] && getWeightedVote(msg.sender)  > 0);\\n        _;\\n    }\\n\\n    modifier roundState(uint256 roundID, Status _status) {\\n        require(rounds[roundID].status == _status, \\\"Round is not open\\\");\\n        _;\\n    }\\n    \\n    modifier isAdmin() {\\n        bool ret = false;\\n        for(uint i = 0; !ret && i < admins.length; i++) {\\n            if(admins[i] == msg.sender) {\\n                ret = true;\\n            }\\n        }\\n        require(ret);\\n        _;\\n    }\\n\\n    /* ============ Constructor ============ */\\n\\n    constructor(address registryAddress, address _paymentStreams, uint256 _timePerRound, bool _timed, address adminAddr) {\\n        registry = IContributorRegistry(registryAddress);\\n        paymentStreams = IPaymentStream(_paymentStreams);\\n        admins.push(adminAddr);\\n        timePerRound = _timePerRound;\\n        timed = _timed;\\n    }\\n\\n    /* ============ Mutating Functions ============ */\\n\\n    /**\\n     * Opens a new round.\\n     * Confirms that there exist valid users passed to the function before opening a new round.\\n     * A new round opens with a given salary to be split  amongst the contributors following the voting period.\\n     * \\n     *\\n     * @param newUsers          Addresses of the proposed users to be eligible for votes\\n     *\\n     */\\n    function openRound(\\n        address[] memory newUsers\\n    ) public  {\\n        // Check to see if only round open\\n        require(rounds.length == 0 || rounds[rounds.length - 1].status != Status.Open, \\\"All prior rounds must be closed\\\");\\n        // Checks to see if there are valid users in the passed array\\n        uint256 roundID = rounds.length == 0 ?  0 :  rounds.length - 1;\\n        for(uint256 i = 0; i < newUsers.length; i++) {\\n            address tmpUser = newUsers[i];\\n            if(registry.isValidVoter(tmpUser)) {\\n                usersInRound[roundID].push(newUsers[i]);\\n            }\\n        }\\n\\n        // If there are valid users, then create a new round. Else, do not open a new round\\n        require(usersInRound[roundID].length > 0, \\\"There must be a valid user\\\");\\n        rounds.push(Round({\\n            status: Status.Open,\\n            startTime: block.timestamp,\\n            totalVotes: 0\\n        }));\\n        emit RoundOpened(roundID);\\n    }\\n\\n    /**\\n     * Votes for users in a given round.\\n     * Confirms that the function caller is eligible to vote for a round.\\n     * The function caller casts his vote for the inputted addresses.\\n     * \\n     *\\n     * @param roundID          The ID of the round\\n     * @param _for             The salary of the current round\\n     *\\n     */\\n    function castVote(\\n        uint256 roundID,\\n        address[] memory _for\\n    ) public canVote(roundID) roundState(roundID, Status.Open) {\\n        hasVoted[roundID][msg.sender] = true;\\n        for(uint256 i = 0; i < _for.length; i++) {\\n            numVotes[roundID][_for[i]] += getWeightedVote(msg.sender); // Add safe math later\\n            rounds[roundID].totalVotes += getWeightedVote(msg.sender);\\n        }\\n        emit VoteCast(roundID, msg.sender);\\n    }\\n\\n    /**\\n     * Closes a given round.\\n     * Confirms that the given round is open.\\n     * The function caller casts his vote for the inputted addresses.\\n     * \\n     *\\n     * @param roundID           The ID of the round\\n     * @param _newStatus        The new status, either closed or canceled, for the given round\\n     *\\n     */\\n    function closeRound(\\n        uint256 roundID,\\n        Status _newStatus\\n    ) public  {\\n        // Check for round status\\n        require(rounds[roundID].status == Status.Open, \\\"The voting block is not closed\\\");\\n        // Inputted round can only be either canceled or declared closed\\n        require(_newStatus != Status.Open, \\\"Can only close or cancel a round\\\");\\n        // Changes the round status\\n        rounds[roundID].status = _newStatus;\\n        emit RoundClosed(roundID, msg.sender);\\n    }\\n\\n    /* ============ Getter Functions ============ */\\n\\n    function getRounds() public view returns(Round[] memory) {\\n        return rounds;\\n    }\\n\\n    function getRoundVotes(uint256 roundID) public view returns(uint256) {\\n        return rounds[roundID].totalVotes;\\n    }\\n\\n    function getRoundUsers(uint256 roundID) public view returns(address[] memory) {\\n        return usersInRound[roundID];\\n    }\\n\\n    function getRoundNumber() public view returns(uint256) {\\n        return rounds.length - 1;\\n    }\\n\\n    function getRoundVotesPerUser(address user, uint256 roundID) public view returns(uint256) {\\n        return numVotes[roundID][user];\\n    }\\n\\n    function getWeightedVote(address user) public view returns(uint256){\\n        return weightedVoting[user] + 1;\\n    }\\n\\n    function distributeSalaries() public {\\n        uint256 roundID = getRoundNumber();\\n        // Logic should probably be moved elsewhere\\n        uint256 totalVotes = getRoundVotes(roundID);\\n        address[] memory tmpUsers = getRoundUsers(roundID);\\n        uint256[] memory votesPerUser;\\n        for(uint256 i = 0; i < tmpUsers.length; i++) {\\n            address tmpUser = tmpUsers[i];\\n            uint256 tmpUserVotes = getRoundVotesPerUser(tmpUser, roundID);\\n            uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;\\n            votesPerUser[i] = salaryPercentage;\\n        }\\n        paymentStreams.setUserScores(tmpUsers, votesPerUser);\\n        paymentStreams.updatePayments();\\n    }\\n}\",\"keccak256\":\"0xa15dc14737c154c0ff0a7ed9bc37db6c92585cbd9a07678985cde46745fee24c\",\"license\":\"MIT\"},\"contracts/interfaces/IContributorRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\ninterface IContributorRegistry{\\n    function isValidVoter(address user) external returns (bool);\\n}\\n\\n\",\"keccak256\":\"0xf732c8898cdf8c7eebe2452b21f134c60069ea350d42dd474ec3e60e3cad0e98\",\"license\":\"MIT\"},\"contracts/interfaces/IPaymentStream.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\ninterface IPaymentStream{\\n    function setUserScores(address[] memory users, uint256[] memory scores) external;\\n    function updatePayments() external;\\n}\\n\\n\",\"keccak256\":\"0xa5db147d5b94865c04c885054f4e317a00f0b1a6ac8ec04e317807ca6ad411d6\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60806040523480156200001157600080fd5b50604051620013d6380380620013d68339810160408190526200003491620000d5565b600180546001600160a01b03199081166001600160a01b03978816178255600280548216968816969096179095556003805491820181556000527fc2575a0e9e593c00f959f8c92f12db2869c3395a3b0502d05e2516446f71f85b0180549094169416939093179091556008556009805460ff191691151591909117905562000140565b80516001600160a01b0381168114620000d057600080fd5b919050565b600080600080600060a08688031215620000ed578081fd5b620000f886620000b8565b94506200010860208701620000b8565b9350604086015192506060860151801515811462000124578182fd5b91506200013460808701620000b8565b90509295509295909350565b61128680620001506000396000f3fe608060405234801561001057600080fd5b50600436106100db5760003560e01c80630c3643dc146100e05780630cde04561461010957806310a93d951461011157806314bfd6d01461012657806320b698b31461014657806343859632146101595780634c280414146101795780636984d0701461019957806375e75f85146101ae5780637b103999146101b65780638c65c81f146101be5780639669cdbb146101e05780639a23648f146101f3578063a0b412a614610206578063c89c1a8914610219578063dab890081461022c578063e3af3b7714610234575b600080fd5b6100f36100ee366004610d8f565b610247565b604051610100919061117b565b60405180910390f35b6100f3610273565b61012461011f366004610e76565b610288565b005b610139610134366004610e33565b61048f565b6040516101009190610f72565b610124610154366004610dd9565b6104b9565b61016c610167366004610e4b565b6107a7565b604051610100919061104f565b61018c610187366004610e33565b6107c7565b6040516101009190610f86565b6101a1610833565b6040516101009190610fef565b6101396108ef565b6101396108fe565b6101d16101cc366004610e33565b61090d565b6040516101009392919061105a565b6100f36101ee366004610e33565b610944565b6100f3610201366004610e4b565b61097f565b610139610214366004610eec565b61099c565b610124610227366004610eba565b6109d4565b610124610b16565b6100f3610242366004610db0565b610cb3565b6001600160a01b03811660009081526007602052604081205461026b90600161119b565b90505b919050565b60008054610283906001906111f2565b905090565b6000828152600660209081526040808320338452909152902054829060ff161580156102bc575060006102ba33610247565b115b6102c557600080fd5b82600080600083815481106102ea57634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff16600281111561031d57634e487b7160e01b600052602160045260246000fd5b146103435760405162461bcd60e51b815260040161033a906110e5565b60405180910390fd5b60008581526006602090815260408083203384529091528120805460ff191660011790555b845181101561044e5761037a33610247565b6005600088815260200190815260200160002060008784815181106103af57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b0316815260200190815260200160002060008282546103e6919061119b565b909155506103f5905033610247565b6000878154811061041657634e487b7160e01b600052603260045260246000fd5b90600052602060002090600302016002016000828254610436919061119b565b9091555081905061044681611209565b915050610368565b507ff1003b73c437642c0460aee9cd9628b0b8c447b66e6c7c905531b9c644214a118533604051610480929190611184565b60405180910390a15050505050565b6003818154811061049f57600080fd5b6000918252602090912001546001600160a01b0316905081565b6000541580610528575060008080546104d4906001906111f2565b815481106104f257634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff16600281111561052557634e487b7160e01b600052602160045260246000fd5b14155b6105445760405162461bcd60e51b815260040161033a90611110565b60008054156105615760005461055c906001906111f2565b610564565b60005b905060005b82518110156106a657600083828151811061059457634e487b7160e01b600052603260045260246000fd5b6020908102919091010151600154604051630692d88f60e51b81529192506001600160a01b03169063d25b11e0906105d0908490600401610f72565b602060405180830381600087803b1580156105ea57600080fd5b505af11580156105fe573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106229190610e13565b15610693576000838152600460205260409020845185908490811061065757634e487b7160e01b600052603260045260246000fd5b60209081029190910181015182546001810184556000938452919092200180546001600160a01b0319166001600160a01b039092169190911790555b508061069e81611209565b915050610569565b506000818152600460205260409020546106d25760405162461bcd60e51b815260040161033a90611147565b604080516060810182526000808252426020830152918101829052815460018082018455928052815160039091027f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56301805492939092839160ff199091169083600281111561075157634e487b7160e01b600052602160045260246000fd5b0217905550602082015181600101556040820151816002015550507ff5d5acf597a5f9d06a24389ebea67f576c74da4d4a73b97a5dfac2452acad6478160405161079b919061117b565b60405180910390a15050565b600660209081526000928352604080842090915290825290205460ff1681565b60008181526004602090815260409182902080548351818402810184019094528084526060939283018282801561082757602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610809575b50505050509050919050565b60606000805480602002602001604051908101604052809291908181526020016000905b828210156108e6576000848152602090206040805160608101909152600384029091018054829060ff1660028111156108a057634e487b7160e01b600052602160045260246000fd5b60028111156108bf57634e487b7160e01b600052602160045260246000fd5b81526020016001820154815260200160028201548152505081526020019060010190610857565b50505050905090565b6002546001600160a01b031681565b6001546001600160a01b031681565b6000818154811061091d57600080fd5b600091825260209091206003909102018054600182015460029092015460ff909116925083565b600080828154811061096657634e487b7160e01b600052603260045260246000fd5b9060005260206000209060030201600201549050919050565b600560209081526000928352604080842090915290825290205481565b600460205281600052604060002081815481106109b857600080fd5b6000918252602090912001546001600160a01b03169150829050565b60008083815481106109f657634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff166002811115610a2957634e487b7160e01b600052602160045260246000fd5b14610a465760405162461bcd60e51b815260040161033a906110ae565b6000816002811115610a6857634e487b7160e01b600052602160045260246000fd5b1415610a865760405162461bcd60e51b815260040161033a90611079565b8060008381548110610aa857634e487b7160e01b600052603260045260246000fd5b60009182526020909120600390910201805460ff19166001836002811115610ae057634e487b7160e01b600052602160045260246000fd5b02179055507f2a0641ef71e80039cddc7522d6459d2caef71d8dd8651c053a2700f2ac176900823360405161079b929190611184565b6000610b20610273565b90506000610b2d82610944565b90506000610b3a836107c7565b9050606060005b8251811015610be0576000838281518110610b6c57634e487b7160e01b600052603260045260246000fd5b602002602001015190506000610b828288610cb3565b90506000610b9087836111b3565b610b9b9060646111d3565b905080858581518110610bbe57634e487b7160e01b600052603260045260246000fd5b6020026020010181815250505050508080610bd890611209565b915050610b41565b5060025460405163cf2ca55d60e01b81526001600160a01b039091169063cf2ca55d90610c139085908590600401610f99565b600060405180830381600087803b158015610c2d57600080fd5b505af1158015610c41573d6000803e3d6000fd5b50505050600260009054906101000a90046001600160a01b03166001600160a01b031663084b82896040518163ffffffff1660e01b8152600401600060405180830381600087803b158015610c9557600080fd5b505af1158015610ca9573d6000803e3d6000fd5b5050505050505050565b60009081526005602090815260408083206001600160a01b03949094168352929052205490565b80356001600160a01b038116811461026e57600080fd5b600082601f830112610d01578081fd5b813560206001600160401b0380831115610d1d57610d1d61123a565b81830260405183828201018181108482111715610d3c57610d3c61123a565b60405284815283810192508684018288018501891015610d5a578687fd5b8692505b85831015610d8357610d6f81610cda565b845292840192600192909201918401610d5e565b50979650505050505050565b600060208284031215610da0578081fd5b610da982610cda565b9392505050565b60008060408385031215610dc2578081fd5b610dcb83610cda565b946020939093013593505050565b600060208284031215610dea578081fd5b81356001600160401b03811115610dff578182fd5b610e0b84828501610cf1565b949350505050565b600060208284031215610e24578081fd5b81518015158114610da9578182fd5b600060208284031215610e44578081fd5b5035919050565b60008060408385031215610e5d578182fd5b82359150610e6d60208401610cda565b90509250929050565b60008060408385031215610e88578182fd5b8235915060208301356001600160401b03811115610ea4578182fd5b610eb085828601610cf1565b9150509250929050565b60008060408385031215610ecc578182fd5b82359150602083013560038110610ee1578182fd5b809150509250929050565b60008060408385031215610efe578182fd5b50508035926020909101359150565b6000815180845260208085019450808401835b83811015610f455781516001600160a01b031687529582019590820190600101610f20565b509495945050505050565b60038110610f6e57634e487b7160e01b600052602160045260246000fd5b9052565b6001600160a01b0391909116815260200190565b600060208252610da96020830184610f0d565b600060408252610fac6040830185610f0d565b828103602084810191909152845180835285820192820190845b81811015610fe257845183529383019391830191600101610fc6565b5090979650505050505050565b602080825282518282018190526000919060409081850190868401855b82811015611042578151611021858251610f50565b8087015185880152850151858501526060909301929085019060010161100c565b5091979650505050505050565b901515815260200190565b606081016110688286610f50565b602082019390935260400152919050565b6020808252818101527f43616e206f6e6c7920636c6f7365206f722063616e63656c206120726f756e64604082015260600190565b6020808252601e908201527f54686520766f74696e6720626c6f636b206973206e6f7420636c6f7365640000604082015260600190565b6020808252601190820152702937bab7321034b9903737ba1037b832b760791b604082015260600190565b6020808252601f908201527f416c6c207072696f7220726f756e6473206d75737420626520636c6f73656400604082015260600190565b6020808252601a90820152792a3432b9329036bab9ba1031329030903b30b634b2103ab9b2b960311b604082015260600190565b90815260200190565b9182526001600160a01b0316602082015260400190565b600082198211156111ae576111ae611224565b500190565b6000826111ce57634e487b7160e01b81526012600452602481fd5b500490565b60008160001904831182151516156111ed576111ed611224565b500290565b60008282101561120457611204611224565b500390565b600060001982141561121d5761121d611224565b5060010190565b634e487b7160e01b600052601160045260246000fd5b634e487b7160e01b600052604160045260246000fdfea2646970667358221220351e78c7d63d13d6cbe40b1c62a16c4984a38f7f57eda562cbe66dc18a71a49f64736f6c63430008000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100db5760003560e01c80630c3643dc146100e05780630cde04561461010957806310a93d951461011157806314bfd6d01461012657806320b698b31461014657806343859632146101595780634c280414146101795780636984d0701461019957806375e75f85146101ae5780637b103999146101b65780638c65c81f146101be5780639669cdbb146101e05780639a23648f146101f3578063a0b412a614610206578063c89c1a8914610219578063dab890081461022c578063e3af3b7714610234575b600080fd5b6100f36100ee366004610d8f565b610247565b604051610100919061117b565b60405180910390f35b6100f3610273565b61012461011f366004610e76565b610288565b005b610139610134366004610e33565b61048f565b6040516101009190610f72565b610124610154366004610dd9565b6104b9565b61016c610167366004610e4b565b6107a7565b604051610100919061104f565b61018c610187366004610e33565b6107c7565b6040516101009190610f86565b6101a1610833565b6040516101009190610fef565b6101396108ef565b6101396108fe565b6101d16101cc366004610e33565b61090d565b6040516101009392919061105a565b6100f36101ee366004610e33565b610944565b6100f3610201366004610e4b565b61097f565b610139610214366004610eec565b61099c565b610124610227366004610eba565b6109d4565b610124610b16565b6100f3610242366004610db0565b610cb3565b6001600160a01b03811660009081526007602052604081205461026b90600161119b565b90505b919050565b60008054610283906001906111f2565b905090565b6000828152600660209081526040808320338452909152902054829060ff161580156102bc575060006102ba33610247565b115b6102c557600080fd5b82600080600083815481106102ea57634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff16600281111561031d57634e487b7160e01b600052602160045260246000fd5b146103435760405162461bcd60e51b815260040161033a906110e5565b60405180910390fd5b60008581526006602090815260408083203384529091528120805460ff191660011790555b845181101561044e5761037a33610247565b6005600088815260200190815260200160002060008784815181106103af57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b0316815260200190815260200160002060008282546103e6919061119b565b909155506103f5905033610247565b6000878154811061041657634e487b7160e01b600052603260045260246000fd5b90600052602060002090600302016002016000828254610436919061119b565b9091555081905061044681611209565b915050610368565b507ff1003b73c437642c0460aee9cd9628b0b8c447b66e6c7c905531b9c644214a118533604051610480929190611184565b60405180910390a15050505050565b6003818154811061049f57600080fd5b6000918252602090912001546001600160a01b0316905081565b6000541580610528575060008080546104d4906001906111f2565b815481106104f257634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff16600281111561052557634e487b7160e01b600052602160045260246000fd5b14155b6105445760405162461bcd60e51b815260040161033a90611110565b60008054156105615760005461055c906001906111f2565b610564565b60005b905060005b82518110156106a657600083828151811061059457634e487b7160e01b600052603260045260246000fd5b6020908102919091010151600154604051630692d88f60e51b81529192506001600160a01b03169063d25b11e0906105d0908490600401610f72565b602060405180830381600087803b1580156105ea57600080fd5b505af11580156105fe573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106229190610e13565b15610693576000838152600460205260409020845185908490811061065757634e487b7160e01b600052603260045260246000fd5b60209081029190910181015182546001810184556000938452919092200180546001600160a01b0319166001600160a01b039092169190911790555b508061069e81611209565b915050610569565b506000818152600460205260409020546106d25760405162461bcd60e51b815260040161033a90611147565b604080516060810182526000808252426020830152918101829052815460018082018455928052815160039091027f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56301805492939092839160ff199091169083600281111561075157634e487b7160e01b600052602160045260246000fd5b0217905550602082015181600101556040820151816002015550507ff5d5acf597a5f9d06a24389ebea67f576c74da4d4a73b97a5dfac2452acad6478160405161079b919061117b565b60405180910390a15050565b600660209081526000928352604080842090915290825290205460ff1681565b60008181526004602090815260409182902080548351818402810184019094528084526060939283018282801561082757602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610809575b50505050509050919050565b60606000805480602002602001604051908101604052809291908181526020016000905b828210156108e6576000848152602090206040805160608101909152600384029091018054829060ff1660028111156108a057634e487b7160e01b600052602160045260246000fd5b60028111156108bf57634e487b7160e01b600052602160045260246000fd5b81526020016001820154815260200160028201548152505081526020019060010190610857565b50505050905090565b6002546001600160a01b031681565b6001546001600160a01b031681565b6000818154811061091d57600080fd5b600091825260209091206003909102018054600182015460029092015460ff909116925083565b600080828154811061096657634e487b7160e01b600052603260045260246000fd5b9060005260206000209060030201600201549050919050565b600560209081526000928352604080842090915290825290205481565b600460205281600052604060002081815481106109b857600080fd5b6000918252602090912001546001600160a01b03169150829050565b60008083815481106109f657634e487b7160e01b600052603260045260246000fd5b600091825260209091206003909102015460ff166002811115610a2957634e487b7160e01b600052602160045260246000fd5b14610a465760405162461bcd60e51b815260040161033a906110ae565b6000816002811115610a6857634e487b7160e01b600052602160045260246000fd5b1415610a865760405162461bcd60e51b815260040161033a90611079565b8060008381548110610aa857634e487b7160e01b600052603260045260246000fd5b60009182526020909120600390910201805460ff19166001836002811115610ae057634e487b7160e01b600052602160045260246000fd5b02179055507f2a0641ef71e80039cddc7522d6459d2caef71d8dd8651c053a2700f2ac176900823360405161079b929190611184565b6000610b20610273565b90506000610b2d82610944565b90506000610b3a836107c7565b9050606060005b8251811015610be0576000838281518110610b6c57634e487b7160e01b600052603260045260246000fd5b602002602001015190506000610b828288610cb3565b90506000610b9087836111b3565b610b9b9060646111d3565b905080858581518110610bbe57634e487b7160e01b600052603260045260246000fd5b6020026020010181815250505050508080610bd890611209565b915050610b41565b5060025460405163cf2ca55d60e01b81526001600160a01b039091169063cf2ca55d90610c139085908590600401610f99565b600060405180830381600087803b158015610c2d57600080fd5b505af1158015610c41573d6000803e3d6000fd5b50505050600260009054906101000a90046001600160a01b03166001600160a01b031663084b82896040518163ffffffff1660e01b8152600401600060405180830381600087803b158015610c9557600080fd5b505af1158015610ca9573d6000803e3d6000fd5b5050505050505050565b60009081526005602090815260408083206001600160a01b03949094168352929052205490565b80356001600160a01b038116811461026e57600080fd5b600082601f830112610d01578081fd5b813560206001600160401b0380831115610d1d57610d1d61123a565b81830260405183828201018181108482111715610d3c57610d3c61123a565b60405284815283810192508684018288018501891015610d5a578687fd5b8692505b85831015610d8357610d6f81610cda565b845292840192600192909201918401610d5e565b50979650505050505050565b600060208284031215610da0578081fd5b610da982610cda565b9392505050565b60008060408385031215610dc2578081fd5b610dcb83610cda565b946020939093013593505050565b600060208284031215610dea578081fd5b81356001600160401b03811115610dff578182fd5b610e0b84828501610cf1565b949350505050565b600060208284031215610e24578081fd5b81518015158114610da9578182fd5b600060208284031215610e44578081fd5b5035919050565b60008060408385031215610e5d578182fd5b82359150610e6d60208401610cda565b90509250929050565b60008060408385031215610e88578182fd5b8235915060208301356001600160401b03811115610ea4578182fd5b610eb085828601610cf1565b9150509250929050565b60008060408385031215610ecc578182fd5b82359150602083013560038110610ee1578182fd5b809150509250929050565b60008060408385031215610efe578182fd5b50508035926020909101359150565b6000815180845260208085019450808401835b83811015610f455781516001600160a01b031687529582019590820190600101610f20565b509495945050505050565b60038110610f6e57634e487b7160e01b600052602160045260246000fd5b9052565b6001600160a01b0391909116815260200190565b600060208252610da96020830184610f0d565b600060408252610fac6040830185610f0d565b828103602084810191909152845180835285820192820190845b81811015610fe257845183529383019391830191600101610fc6565b5090979650505050505050565b602080825282518282018190526000919060409081850190868401855b82811015611042578151611021858251610f50565b8087015185880152850151858501526060909301929085019060010161100c565b5091979650505050505050565b901515815260200190565b606081016110688286610f50565b602082019390935260400152919050565b6020808252818101527f43616e206f6e6c7920636c6f7365206f722063616e63656c206120726f756e64604082015260600190565b6020808252601e908201527f54686520766f74696e6720626c6f636b206973206e6f7420636c6f7365640000604082015260600190565b6020808252601190820152702937bab7321034b9903737ba1037b832b760791b604082015260600190565b6020808252601f908201527f416c6c207072696f7220726f756e6473206d75737420626520636c6f73656400604082015260600190565b6020808252601a90820152792a3432b9329036bab9ba1031329030903b30b634b2103ab9b2b960311b604082015260600190565b90815260200190565b9182526001600160a01b0316602082015260400190565b600082198211156111ae576111ae611224565b500190565b6000826111ce57634e487b7160e01b81526012600452602481fd5b500490565b60008160001904831182151516156111ed576111ed611224565b500290565b60008282101561120457611204611224565b500390565b600060001982141561121d5761121d611224565b5060010190565b634e487b7160e01b600052601160045260246000fd5b634e487b7160e01b600052604160045260246000fdfea2646970667358221220351e78c7d63d13d6cbe40b1c62a16c4984a38f7f57eda562cbe66dc18a71a49f64736f6c63430008000033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "castVote(uint256,address[])": {
+        "params": {
+          "_for": "The salary of the current round",
+          "roundID": "The ID of the round"
+        }
+      },
+      "closeRound(uint256,uint8)": {
+        "params": {
+          "_newStatus": "The new status, either closed or canceled, for the given round",
+          "roundID": "The ID of the round"
+        }
+      },
+      "openRound(address[])": {
+        "params": {
+          "newUsers": "Addresses of the proposed users to be eligible for votes"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "castVote(uint256,address[])": {
+        "notice": "Votes for users in a given round. Confirms that the function caller is eligible to vote for a round. The function caller casts his vote for the inputted addresses. "
+      },
+      "closeRound(uint256,uint8)": {
+        "notice": "Closes a given round. Confirms that the given round is open. The function caller casts his vote for the inputted addresses. "
+      },
+      "openRound(address[])": {
+        "notice": "Opens a new round. Confirms that there exist valid users passed to the function before opening a new round. A new round opens with a given salary to be split  amongst the contributors following the voting period. "
+      }
+    },
+    "notice": "Simple implementation of a voting contract done on-chain. This contract allows confirmed members to place votes for a particular member. This contract exports the votes but does not define a strategy. Votes for registered users are placed in Rounds, and the round manager contract coordinates rounds for a particular DAO. Rounds are not currently time bound, they are flexible and minimal. TODO: Implement timer between rounds. Probably better on the frontend, but users may also want to block abuse Implement a timeout between rounds so that the parent contract has enough time to process everything (prevents abuse)",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 4433,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "rounds",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_array(t_struct(Round)4429_storage)dyn_storage"
+      },
+      {
+        "astId": 4436,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "registry",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_contract(IContributorRegistry)4986"
+      },
+      {
+        "astId": 4439,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "paymentStreams",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_contract(IPaymentStream)5001"
+      },
+      {
+        "astId": 4442,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "admins",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_array(t_address)dyn_storage"
+      },
+      {
+        "astId": 4447,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "usersInRound",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_uint256,t_array(t_address)dyn_storage)"
+      },
+      {
+        "astId": 4453,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "numVotes",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 4459,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "hasVoted",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_mapping(t_uint256,t_mapping(t_address,t_bool))"
+      },
+      {
+        "astId": 4463,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "weightedVoting",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 4465,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "timePerRound",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 4467,
+        "contract": "contracts/RoundManager.sol:RoundManager",
+        "label": "timed",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_bool"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_address)dyn_storage": {
+        "base": "t_address",
+        "encoding": "dynamic_array",
+        "label": "address[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_struct(Round)4429_storage)dyn_storage": {
+        "base": "t_struct(Round)4429_storage",
+        "encoding": "dynamic_array",
+        "label": "struct RoundManager.Round[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_contract(IContributorRegistry)4986": {
+        "encoding": "inplace",
+        "label": "contract IContributorRegistry",
+        "numberOfBytes": "20"
+      },
+      "t_contract(IPaymentStream)5001": {
+        "encoding": "inplace",
+        "label": "contract IPaymentStream",
+        "numberOfBytes": "20"
+      },
+      "t_enum(Status)4421": {
+        "encoding": "inplace",
+        "label": "enum RoundManager.Status",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_array(t_address)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_address)dyn_storage"
+      },
+      "t_mapping(t_uint256,t_mapping(t_address,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(address => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_bool)"
+      },
+      "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_struct(Round)4429_storage": {
+        "encoding": "inplace",
+        "label": "struct RoundManager.Round",
+        "members": [
+          {
+            "astId": 4424,
+            "contract": "contracts/RoundManager.sol:RoundManager",
+            "label": "status",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_enum(Status)4421"
+          },
+          {
+            "astId": 4426,
+            "contract": "contracts/RoundManager.sol:RoundManager",
+            "label": "startTime",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 4428,
+            "contract": "contracts/RoundManager.sol:RoundManager",
+            "label": "totalVotes",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
