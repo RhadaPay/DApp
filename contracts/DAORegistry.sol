@@ -70,6 +70,8 @@ contract DAORegistry is Ownable {
 
     function register(string memory name, uint8 _requiredConfirmations, uint256 _timePerRound, bool _timed, uint256 _salaryPerRound, uint256 _salaryPeriod) public {
         ContributorRegistry newRegistry = new ContributorRegistry(_requiredConfirmations);
+        newRegistry.transferOwnership(msg.sender);
+        
         PaymentStream newPaymentStream = new PaymentStream(_cfa, _host, msg.sender);
         daoList.push(DAO({
             name: name,

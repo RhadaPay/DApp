@@ -4,7 +4,7 @@ import { RoundManager } from "typechain"
 import { ActionTree, GetterTree, Module, MutationTree } from "vuex"
 import { RoundManager__factory } from "../../../typechain/factories/RoundManager__factory";
 
-const ROUND_MANAGER_CONTRACT = "0xBD0eDbD7262B129086a4eb3E69105FB7CAc30093"
+const ROUND_MANAGER_CONTRACT = "0xD316eb3F1036c3D20537228Bff19DB709Bbd2bbe"
 declare global {
   interface Window {
     ethereum: {

@@ -61,7 +61,7 @@ contract RoundManager {
     /* Modifiers */
 
     modifier canVote(uint256 roundID) {
-        require(!hasVoted[roundID][msg.sender] && weightedVoting[msg.sender] > 0);
+        require(!hasVoted[roundID][msg.sender] && getWeightedVote(msg.sender)  > 0);
         _;
     }
 
@@ -141,8 +141,8 @@ contract RoundManager {
     ) public canVote(roundID) roundState(roundID, Status.Open) {
         hasVoted[roundID][msg.sender] = true;
         for(uint256 i = 0; i < _for.length; i++) {
-            numVotes[roundID][msg.sender] += weightedVoting[msg.sender]; // Add safe math later
-            rounds[roundID].totalVotes += weightedVoting[msg.sender];
+            numVotes[roundID][msg.sender] += getWeightedVote(msg.sender); // Add safe math later
+            rounds[roundID].totalVotes += getWeightedVote(msg.sender);
         }
         emit VoteCast(roundID, msg.sender);
     }
@@ -190,6 +190,10 @@ contract RoundManager {
 
     function getRoundVotesPerUser(address user, uint256 roundID) public view returns(uint256) {
         return numVotes[roundID][user];
+    }
+
+    function getWeightedVote(address user) public view returns(uint256){
+        return weightedVoting[user] + 1;
     }
 
     function distributeSalaries() public {
