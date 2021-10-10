@@ -8,7 +8,8 @@
     "serve": "vite preview",
     "build": "vite build",
     "dev": "vite",
-    "typechain": "hardhat typechain"
+    "typechain": "hardhat typechain",
+    "deploy-mumbai": "npx hardhat deploy --network mumbai"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --fix",
