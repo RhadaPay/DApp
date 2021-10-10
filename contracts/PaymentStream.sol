@@ -6,8 +6,9 @@ import {IConstantFlowAgreementV1} from "@superfluid-finance/ethereum-contracts/c
 import {SuperAppBase} from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperAppBase.sol";
 
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import "./interfaces/IPaymentStream.sol";
 
-contract PaymentStream is SuperAppBase {
+contract PaymentStream is IPaymentStream, SuperAppBase {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     uint8 ratioPct = 100;
@@ -21,9 +22,9 @@ contract PaymentStream is SuperAppBase {
     ISuperToken _token;
     bytes32 _lastAgreementId;
 
-    //only dao registry should call it
-    function setUserScores(address[] memory users, uint256[] memory scores) public {
-        require(msg.sender == _owner, "!auth");
+    //FIXME: only dao registry should call it
+    function setUserScores(address[] memory users, uint256[] memory scores) public override{
+        //require(msg.sender == _owner, "!auth");
         require(users.length == scores.length);
         receivers = users;
         for (uint256 i = 0; i < users.length; i++) {
@@ -31,7 +32,7 @@ contract PaymentStream is SuperAppBase {
         }
     }
 
-    function updatePayments() public {
+    function updatePayments() public override {
         require(_lastAgreementId != bytes32(0));
         int96 flowRate;
         uint256 deposit;

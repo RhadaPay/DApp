@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
-interface IVoterRegistry{
+pragma solidity ^0.8.0;
+interface IContributorRegistry{
     function isValidVoter(address user) external returns (bool);
 }
 

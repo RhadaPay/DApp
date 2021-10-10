@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
- import "./ContributorRegistry.sol";
+import "./interfaces/IContributorRegistry.sol";
+import "./interfaces/IPaymentStream.sol";
+
 /**
     Simple implementation of a voting contract done on-chain.
     This contract allows confirmed members to place votes for a particular member.
@@ -32,7 +34,9 @@ contract RoundManager {
     // Stores rounds
     Round[] public rounds;
     // The registry of a specific DAO
-    ContributorRegistry public registry;
+    IContributorRegistry public registry;
+    IPaymentStream public paymentStreams;
+
     // List of addresses with admin privileges for a given DAO
     address[] public admins;
     // List of the addresses in the current round
@@ -79,8 +83,9 @@ contract RoundManager {
 
     /* ============ Constructor ============ */
 
-    constructor(address registryAddress, uint256 _timePerRound, bool _timed) {
-        registry = ContributorRegistry(registryAddress);
+    constructor(address registryAddress, address _paymentStreams, uint256 _timePerRound, bool _timed) {
+        registry = IContributorRegistry(registryAddress);
+        paymentStreams = IPaymentStream(_paymentStreams);
         admins.push(msg.sender);
         timePerRound = _timePerRound;
         timed = _timed;
@@ -185,5 +190,21 @@ contract RoundManager {
 
     function getRoundVotesPerUser(address user, uint256 roundID) public view returns(uint256) {
         return numVotes[roundID][user];
+    }
+
+    function distributeSalaries() public {
+        uint256 roundID = getRoundNumber();
+        // Logic should probably be moved elsewhere
+        uint256 totalVotes = getRoundVotes(roundID);
+        address[] memory tmpUsers = getRoundUsers(roundID);
+        uint256[] memory votesPerUser;
+        for(uint256 i = 0; i < tmpUsers.length; i++) {
+            address tmpUser = tmpUsers[i];
+            uint256 tmpUserVotes = getRoundVotesPerUser(tmpUser, roundID);
+            uint256 salaryPercentage = tmpUserVotes / totalVotes * 100;
+            votesPerUser[i] = salaryPercentage;
+        }
+        paymentStreams.setUserScores(tmpUsers, votesPerUser);
+        paymentStreams.updatePayments();
     }
 }
